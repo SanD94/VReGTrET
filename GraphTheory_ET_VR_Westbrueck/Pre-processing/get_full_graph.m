@@ -18,13 +18,13 @@ function f_graph = get_full_graph(collider_list_file, is_loc)
             "transformed_collidercenter_x", ...
             "transformed_collidercenter_y"], ...
         ["ID", "Name", "x", "y"]);
+
     [C, ia] = unique(node_table.Name);
     node_table = node_table(ia, :);
     if (is_loc)
         node_table = add_loc_graph(node_table);
     end
 
-    f_graph = graph(zeros(height(node_table)), node_table);
+    f_graph = graph(false(height(node_table)), node_table);
 end
 
-% Token 

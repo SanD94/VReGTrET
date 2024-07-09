@@ -18,8 +18,8 @@ for ii = 1:Number
  
     %%% main code
         
-    % load data
-    G = load(file_name).G;
+    % load graph
+    load(file_name);
     inside_query = G.Nodes.inside == true;
 
     iG = subgraph(G, G.Nodes.Name(inside_query));

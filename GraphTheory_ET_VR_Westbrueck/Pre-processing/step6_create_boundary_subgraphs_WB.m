@@ -1,9 +1,9 @@
 %% adjust the following variables: savepath and participant list!-----------
-data_path = "data";
+data_path = fullfile("..", "Data", "preprocessing-pipeline", "graphs");
 
 
 % participants with VR training less than 30% data loss
-PartList = {1007};
+PartList = {2002, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, 2006, 2007, 2013, 2014, 2021, 2020};
 
 %-------------------------------------------------------------------------------
 

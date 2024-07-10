@@ -1,22 +1,24 @@
 %% adjust the following variables: savepath and participant list!-----------
-data_path = "data";
+data_path = fullfile("..", "Data", "preprocessing-pipeline", "graphs");
 
 
 % participants with VR training less than 30% data loss
-PartList = {1007};
+PartList = {2002, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, 2006, 2007, 2013, 2014, 2021, 2020};
+Group = ["Control","Control","Control","Control","Control","Control","Control","Control","Control", ...
+    "Glaucoma","Glaucoma","Glaucoma","Glaucoma","Glaucoma","Glaucoma"];
 
 %-------------------------------------------------------------------------------
 
 Number = length(PartList);
-id = zeros(1, Number);
-group = strings(1, Number);
-inside_connectivity_mean = zeros(1, Number);
-outside_connectivity_mean = zeros(1, Number);
-xor_connectivity_mean = zeros(1, Number);
+id = zeros(Number, 1);
+group = strings(Number, 1);
+inside_connectivity_mean = zeros(Number, 1);
+outside_connectivity_mean = zeros(Number, 1);
+xor_connectivity_mean = zeros(Number, 1);
 
-inside_connectivity_sd = zeros(1, Number);
-outside_connectivity_sd = zeros(1, Number);
-xor_connectivity_sd = zeros(1, Number);
+inside_connectivity_sd = zeros(Number, 1);
+outside_connectivity_sd = zeros(Number, 1);
+xor_connectivity_sd = zeros(Number, 1);
 
 
 for ii = 1:Number
@@ -52,11 +54,12 @@ for ii = 1:Number
     inside_connectivity_sd(ii) = std(ic);
     outside_connectivity_sd(ii) = std(oc);
     xor_connectivity_sd(ii) = std(xc); % TODO : find proper definition
-    % TODO: Add group
+    group(ii) = Group(ii);
 end
 
 connectivity_table = table;
 connectivity_table.id = id;
+connectivity_table.group = group;
 connectivity_table.inside_connectivity_mean = inside_connectivity_mean;
 connectivity_table.outside_connectivity_mean = outside_connectivity_mean;
 connectivity_table.xor_connectivity_mean = xor_connectivity_mean;

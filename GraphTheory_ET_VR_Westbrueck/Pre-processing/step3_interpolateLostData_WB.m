@@ -25,12 +25,11 @@ clear all;
 
 %% adjust the following variables: savepath, current folder and participant list!-----------
 
-savepath = 'E:\Westbrueck Data\SpaRe_Data\1_Exploration\Pre-processsing_pipeline\newThreshold250\interpolatedColliders\';
+savepath = '../interpolated-colliders/';
 
-cd 'E:\Westbrueck Data\SpaRe_Data\1_Exploration\Pre-processsing_pipeline\condensedColls_combinedSess\'
+cd '../Data/preprocessing-pipeline/condensed-colliders-combined/'
 
-
-PartList = {1004 1005 1008 1010 1011 1013 1017 1018 1019 1021 1022 1023 1054 1055 1056 1057 1058 1068 1069 1072 1073 1074 1075 1077 1079 1080};
+PartList = {2002, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, 2006, 2007, 2013, 2014, 2021, 2020};
 
 
 % --------------------------------------------------------------------------
@@ -177,31 +176,7 @@ for ii = 1:Number
                         interpolatedData(index-1).eyeDirectionCombinedLocal_z  = [interpolatedData(index-1:index+1).eyeDirectionCombinedLocal_z];
 
 
-%%
-                        
-                        
-%                         interpolatedData(index-1).TimeStamp= [interpolatedData(index-1).TimeStamp,interpolatedData(index).TimeStamp, interpolatedData(index+1).TimeStamp];
-%                         interpolatedData(index-1).Samples= interpolatedData(index-1).Samples + interpolatedData(index).Samples + interpolatedData(index+1).Samples;
-%                         interpolatedData(index-1).Distance= [interpolatedData(index-1).Distance, interpolatedData(index).Distance, interpolatedData(index+1).Distance];
-%                         interpolatedData(index-1).hitPointX= [interpolatedData(index-1).hitPointX, interpolatedData(index).hitPointX, interpolatedData(index+1).hitPointX];
-%                         interpolatedData(index-1).hitPointY= [interpolatedData(index-1).hitPointY, interpolatedData(index).hitPointY, interpolatedData(index+1).hitPointY];
-%                         interpolatedData(index-1).hitPointZ= [interpolatedData(index-1).hitPointZ, interpolatedData(index).hitPointZ, interpolatedData(index+1).hitPointZ];
-%                         interpolatedData(index-1).PosX= [interpolatedData(index-1).PosX, interpolatedData(index).PosX, interpolatedData(index+1).PosX];
-%                         interpolatedData(index-1).PosY= [interpolatedData(index-1).PosY,interpolatedData(index).PosY,interpolatedData(index+1).PosY];
-%                         interpolatedData(index-1).PosZ= [interpolatedData(index-1).PosZ,interpolatedData(index).PosZ,interpolatedData(index+1).PosZ];
-%                         interpolatedData(index-1).PosRX= [interpolatedData(index-1).PosRX,interpolatedData(index).PosRX,interpolatedData(index+1).PosRX];
-%                         interpolatedData(index-1).PosRY= [interpolatedData(index-1).PosRY, interpolatedData(index).PosRY, interpolatedData(index+1).PosRY];
-%                         interpolatedData(index-1).PosRZ= [interpolatedData(index-1).PosRZ, interpolatedData(index).PosRZ, interpolatedData(index+1).PosRZ];
-%                         interpolatedData(index-1).PosTimeStamp= [interpolatedData(index-1).PosTimeStamp,interpolatedData(index).PosTimeStamp,interpolatedData(index+1).PosTimeStamp];
-%                         interpolatedData(index-1).PupilLTimeStamp= [interpolatedData(index-1).PupilLTimeStamp,interpolatedData(index).PupilLTimeStamp,interpolatedData(index+1).PupilLTimeStamp];
-%                         interpolatedData(index-1).VectorX= [interpolatedData(index-1).VectorX,interpolatedData(index).VectorX,interpolatedData(index+1).VectorX];
-%                         interpolatedData(index-1).VectorY= [interpolatedData(index-1).VectorY,interpolatedData(index).VectorY,interpolatedData(index+1).VectorY];
-%                         interpolatedData(index-1).VectorZ= [interpolatedData(index-1).VectorZ,interpolatedData(index).VectorZ,interpolatedData(index+1).VectorZ];
-%                         interpolatedData(index-1).eye2Dx= [interpolatedData(index-1).eye2Dx,interpolatedData(index).eye2Dx,interpolatedData(index+1).eye2Dx];
-%                         interpolatedData(index-1).eye2Dy= [interpolatedData(index-1).eye2Dy,interpolatedData(index).eye2Dy,interpolatedData(index+1).eye2Dy];
-%                         
-%                         
-%                         
+         
                         
                         
                     elseif (removeRows(index-1) == true)
@@ -293,35 +268,7 @@ for ii = 1:Number
                         interpolatedData(rowTest).eyeDirectionCombinedLocal_x  = [interpolatedData(rowTest).eyeDirectionCombinedLocal_x,interpolatedData(index:index+1).eyeDirectionCombinedLocal_x];
                         interpolatedData(rowTest).eyeDirectionCombinedLocal_y  = [interpolatedData(rowTest).eyeDirectionCombinedLocal_y,interpolatedData(index:index+1).eyeDirectionCombinedLocal_y];
                         interpolatedData(rowTest).eyeDirectionCombinedLocal_z  = [interpolatedData(rowTest).eyeDirectionCombinedLocal_z,interpolatedData(index:index+1).eyeDirectionCombinedLocal_z];
-
-
-
-
-%%
-
-
-
-%                         interpolatedData(rowTest).TimeStamp= [interpolatedData(rowTest).TimeStamp,interpolatedData(index).TimeStamp, interpolatedData(index+1).TimeStamp];
-%                         interpolatedData(rowTest).Samples= interpolatedData(rowTest).Samples + interpolatedData(index).Samples + interpolatedData(index+1).Samples;
-%                         interpolatedData(rowTest).Distance= [interpolatedData(rowTest).Distance, interpolatedData(index).Distance, interpolatedData(index+1).Distance];
-%                         interpolatedData(rowTest).hitPointX= [interpolatedData(rowTest).hitPointX, interpolatedData(index).hitPointX, interpolatedData(index+1).hitPointX];
-%                         interpolatedData(rowTest).hitPointY= [interpolatedData(rowTest).hitPointY, interpolatedData(index).hitPointY, interpolatedData(index+1).hitPointY];
-%                         interpolatedData(rowTest).hitPointZ= [interpolatedData(rowTest).hitPointZ, interpolatedData(index).hitPointZ, interpolatedData(index+1).hitPointZ];
-%                         interpolatedData(rowTest).PosX= [interpolatedData(rowTest).PosX, interpolatedData(index).PosX, interpolatedData(index+1).PosX];
-%                         interpolatedData(rowTest).PosY= [interpolatedData(rowTest).PosY,interpolatedData(index).PosY,interpolatedData(index+1).PosY];
-%                         interpolatedData(rowTest).PosZ= [interpolatedData(rowTest).PosZ,interpolatedData(index).PosZ,interpolatedData(index+1).PosZ];
-%                         interpolatedData(rowTest).PosRX= [interpolatedData(rowTest).PosRX,interpolatedData(index).PosRX,interpolatedData(index+1).PosRX];
-%                         interpolatedData(rowTest).PosRY= [interpolatedData(rowTest).PosRY, interpolatedData(index).PosRY, interpolatedData(index+1).PosRY];
-%                         interpolatedData(rowTest).PosRZ= [interpolatedData(rowTest).PosRZ, interpolatedData(index).PosRZ, interpolatedData(index+1).PosRZ];
-%                         interpolatedData(rowTest).PosTimeStamp= [interpolatedData(rowTest).PosTimeStamp,interpolatedData(index).PosTimeStamp,interpolatedData(index+1).PosTimeStamp];
-%                         interpolatedData(rowTest).PupilLTimeStamp= [interpolatedData(rowTest).PupilLTimeStamp,interpolatedData(index).PupilLTimeStamp,interpolatedData(index+1).PupilLTimeStamp];
-%                         interpolatedData(rowTest).VectorX= [interpolatedData(rowTest).VectorX,interpolatedData(index).VectorX,interpolatedData(index+1).VectorX];
-%                         interpolatedData(rowTest).VectorY= [interpolatedData(rowTest).VectorY,interpolatedData(index).VectorY,interpolatedData(index+1).VectorY];
-%                         interpolatedData(rowTest).VectorZ= [interpolatedData(rowTest).VectorZ,interpolatedData(index).VectorZ,interpolatedData(index+1).VectorZ];
-%                         interpolatedData(rowTest).eye2Dx= [interpolatedData(rowTest).eye2Dx,interpolatedData(index).eye2Dx,interpolatedData(index+1).eye2Dx];
-%                         interpolatedData(rowTest).eye2Dy= [interpolatedData(rowTest).eye2Dy,interpolatedData(index).eye2Dy,interpolatedData(index+1).eye2Dy];
-%                         
-                        
+        
                         
                         
                     else

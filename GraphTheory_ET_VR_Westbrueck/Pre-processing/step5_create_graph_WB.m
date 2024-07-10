@@ -23,13 +23,14 @@ clear all;
 
 %% adjust the following variables: savepath, current folder and participant list!-----------
 
-COLLIDER_FILE = fullfile("utils", "building_collider_list.csv");
-savepath= "graphs";
-data_path = "data";
+COLLIDER_FILE = fullfile("..", "additional_Files", "building_collider_list.csv");
+savepath= fullfile("..", "Data", "preprocessing-pipeline", "graphs");
+data_path = fullfile("..", "Data", "preprocessing-pipeline", "noises-vs-gazes");
 
 
 % participants with VR training less than 30% data loss
-PartList = {1007};
+PartList = {2002, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, 2006, 2007, 2013, 2014, 2021, 2020};
+
 
 %-------------------------------------------------------------------------------
 
@@ -74,7 +75,7 @@ for ii = 1:Number
     G = rmnode(G, 'newSession');
     
     %% save graph
-    save(fullfile(data_path, [num2str(currentPart) '_Graph_WB.mat']),'G');
+    save(fullfile(savepath, [num2str(currentPart) '_Graph_WB.mat']),'G');
     %%%
 
 end
@@ -83,7 +84,7 @@ end
 disp(strcat(num2str(Number), ' Participants analysed'));
 disp(strcat(num2str(countMissingPart),' files were missing'));
 
-csvwrite(fullfile(data_path, 'Missing_Participant_Files'),noFilePartList);
+csvwrite(fullfile(savepath, 'Missing_Participant_Files'),noFilePartList);
 disp('saved missing participant file list');
 
 disp('done');

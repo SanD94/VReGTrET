@@ -1,7 +1,7 @@
 function loc_table = add_loc_graph(node_table, restrict_coord_file)
     arguments (Input)
         node_table table
-        restrict_coord_file (1,1) string = fullfile("utils", "restricted_area_coord_hera.txt")
+        restrict_coord_file (1,1) string = fullfile("..", "additional_Files", "restricted_area_coord_hera.txt")
     end
 
     pos = readmatrix(restrict_coord_file);

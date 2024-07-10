@@ -23,19 +23,18 @@
 
 clear all;
 
-savepath = '....\preprocessing\';
+savepath = '../';
 
-cd '...\preprocessing\condensedColliders\'
-
+cd '../Data/preprocessing-pipeline/condensed-colliders/'
 
 % Participant list of all participants that participated at least 3
 % sessions in the Seahaven - 90min
-PartList = {1909 3668 8466 3430 6348 2151 4502 7670 8258 3377 1529 9364 6387 2179 4470 6971 5507 8834 5978 1002 7399 9202 8551 1540 8041 3693 5696 3299 1582 6430 9176 5602 2011 2098 3856 7942 6594 4510 3949 9748 3686 6543 7205 5582 9437 1155 8547 8261 3023 7021 5239 8936 9961 9017 1089 2044 8195 4272 5346 8072 6398 3743 5253 9475 8954 8699 3593 9848};
 
+PartList = {2002, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, 2006, 2007, 2013, 2014, 2021, 2020};
 %-------------------------------------------------------------------------------------------------
 
 % load overview fixated_vs_noise
-overviewAnalysis = load('overviewAnalysis.mat');
+overviewAnalysis = load('OverviewAnalysis.mat');
 overviewAnalysis = overviewAnalysis.overviewAnalysis;
 
 % create table with all participants that have less than 30% data discarted

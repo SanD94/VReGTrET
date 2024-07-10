@@ -25,20 +25,19 @@
 clear all;
 
 %% adjust the following variables: savepath, current folder and participant list!-----------
-savepathNewData = 'E:\Westbrueck Data\SpaRe_Data\1_Exploration\Pre-processsing_pipeline\rawData_with_renamedColliders\';
-savepathCondensedData = 'E:\Westbrueck Data\SpaRe_Data\1_Exploration\Pre-processsing_pipeline\condensedColliders\';
 
-cd 'E:\Westbrueck Data\SpaRe_Data\1_Exploration\pre-processed_csv\'
+savepathNewData = '../preprocessing-pipeline/renamed-colliders/';
+savepathCondensedData = '../preprocessing-pipeline/condensed-colliders/';
+
+cd '../Data/preprocessed/'
 
 % Participant list of all participants that participated 5 sessions x 30 min 
 % in Westbrook city
+PartList = {2002, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, 2006, 2007, 2013, 2014, 2021, 2020};
 
-PartList = {1004 1005 1008 1010 1011 1013 1017 1018 1019 1021 1022 1023 1054 1055 1056 1057 1058 1068 1069 1072 1073 1074 1075 1077 1079 1080};
-% PartList = {1004};
+colliderList = readtable('../../additional_Files/building_collider_list.csv');
 
-colliderList = readtable('D:\Github\NBP-VR-Eyetracking\GraphTheory_ET_VR_Westbrueck\additional_Files\building_collider_list.csv');
-
-changedColliders = readtable('D:\Github\NBP-VR-Eyetracking\GraphTheory_ET_VR_Westbrueck\additional_Files\list_collider_changes.csv');
+changedColliders = readtable('../../additional_Files/list_collider_changes.csv');
 
 
 %% --------------------------------------------------------------------------
@@ -54,15 +53,19 @@ overviewRenamedGraffiti = table;
 
 overviewMissingData = table;
 
+overviewAnalysis = array2table(zeros(Number,4));
+overviewAnalysis.Properties.VariableNames = {'Participant','noData_Rows','total_Rows','percentage'};
+
+
 % loop code over all participants in participant list
 
 for indexPart = 1:Number
     
     disp(['Paritipcant ', num2str(indexPart)])
     currentPart = cell2mat(PartList(indexPart));
+   
     
-    
-    % loop over recording sessions (should be 5 for each participant)
+    % loop over recording sessions
     for indexSess = 1:5
         tic
         % get eye tracking sessions and loop over them (amount of ET files
@@ -338,84 +341,7 @@ for indexPart = 1:Number
                 dataNew.eyeDirectionCombinedLocal_y  = data.eyeDirectionCombinedLocal_y;
                 dataNew.eyeDirectionCombinedLocal_z  = data.eyeDirectionCombinedLocal_z;
 
-                % all the removed variables
-%                 data = removevars(data,...
-%                     {'leftGazeValidityBitmask';
-%                     'rightGazeValidityBitmask';
-%                     'combinedGazeValidityBitmask';
-%                     'rayCastHitsLeftEye';
-%                     'rayCastHitsRightEye';                    
-%                     'eyePositionLeftWorld_x';
-%                     'eyePositionLeftWorld_y';
-%                     'eyePositionLeftWorld_z';
-%                     'eyeDirectionLeftWorld_x';
-%                     'eyeDirectionLeftWorld_y';
-%                     'eyeDirectionLeftWorld_z';
-%                     'eyeDirectionLeftLocal_x';
-%                     'eyeDirectionLeftLocal_y';
-%                     'eyeDirectionLeftLocal_z';
-%                     'eyePositionRightWorld_x';
-%                     'eyePositionRightWorld_y';
-%                     'eyePositionRightWorld_z';
-%                     'eyeDirectionRightWorld_x';
-%                     'eyeDirectionRightWorld_y';
-%                     'eyeDirectionRightWorld_z';
-%                     'eyeDirectionRightLocal_x';
-%                     'eyeDirectionRightLocal_y';
-%                     'eyeDirectionRightLocal_z';
-%                     'hmdDirectionRight_x';
-%                     'hmdDirectionRight_y';
-%                     'hmdDirectionRight_z';
-%                     'hmdDirectionUp_x';
-%                     'hmdDirectionUp_y';
-%                     'hmdDirectionUp_z';
-%                     'handLeftPosition_x';
-%                     'handLeftPosition_y';
-%                     'handLeftPosition_z';
-%                     'handLeftRotation_x';
-%                     'handLeftRotation_y';
-%                     'handLeftRotation_z';
-%                     'handLeftScale_x';
-%                     'handLeftScale_y';
-%                     'handLeftScale_z';
-%                     'handLeftDirectionForward_x';
-%                     'handLeftDirectionForward_y';
-%                     'handLeftDirectionForward_z';
-%                     'handLeftDirectionRight_x';
-%                     'handLeftDirectionRight_y';
-%                     'handLeftDirectionRight_z';
-%                     'handLeftDirectionUp_x';
-%                     'handLeftDirectionUp_y';
-%                     'handLeftDirectionUp_z';
-%                     'handRightPosition_x';
-%                     'handRightPosition_y';
-%                     'handRightPosition_z';
-%                     'handRightRotation_x';
-%                     'handRightRotation_y';
-%                     'handRightRotation_z';
-%                     'handRightScale_x';
-%                     'handRightScale_y';
-%                     'handRightScale_z';
-%                     'handRightDirectionForward_x';
-%                     'handRightDirectionForward_y';
-%                     'handRightDirectionForward_z';
-%                     'handRightDirectionRight_x';
-%                     'handRightDirectionRight_y';
-%                     'handRightDirectionRight_z';
-%                     'handRightDirectionUp_x';
-%                     'handRightDirectionUp_y';
-%                     'handRightDirectionUp_z';
-%                     'ordinalOfHit_1';
-%                     'hitObjectColliderName_2';
-%                     'ordinalOfHit_2';
-%                     'hitPointOnObject_x_2';
-%                     'hitPointOnObject_y_2';
-%                     'hitPointOnObject_z_2';
-%                     'hitObjectColliderBoundsCenter_x_2';
-%                     'hitObjectColliderBoundsCenter_y_2';
-%                     'hitObjectColliderBoundsCenter_z_2';
-%                     'DataRow'});
-                
+
                 %% update overviews and save the renamed data as table
                 % overviewRemainingCollider witht the colliders that are now in the list = double check renaming
                 
@@ -425,12 +351,15 @@ for indexPart = 1:Number
                               
                 helperOA = table;
                 
-                helperOA.File = dirSess(indexET).name;
-                helperOA.noDataRows = missingDataSum;
-                helperOA.totalRows = totalRows;
-                helperOA.percentageMissing = missingDataSum / totalRows;
+                helperOA.Participant = currentPart;
+                helperOA.noData_Rows = missingDataSum;
+                helperOA.total_Rows = totalRows;
+                helperOA.percentage = missingDataSum * 100 / totalRows;
+
+                
                 
                 overviewMissingData = [overviewMissingData; helperOA];
+                overviewAnalysis = [overviewAnalysis; helperOA];
                 
                 % save the renamed and reduced file
                 
@@ -610,6 +539,10 @@ save([savepathNewData 'overviewRemainingColliders'], 'overviewRemainingColliders
 save([savepathNewData 'overviewAllColliders'], 'overviewAllColliders');
 
 % save missing data overview in both folders
+overviewAnalysis = overviewAnalysis(2:end, :);
+save([savepathNewData 'OverviewAnalysis.mat'],'overviewAnalysis');
+save([savepathCondensedData 'OverviewAnalysis.mat'],'overviewAnalysis');
+
 writetable(overviewMissingData, [savepathNewData 'overviewMissingData.csv']);
 writetable(overviewMissingData, [savepathCondensedData 'overviewMissingData.csv']);
 

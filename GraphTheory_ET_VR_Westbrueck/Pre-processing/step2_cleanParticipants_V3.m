@@ -30,7 +30,7 @@ cd '../Data/preprocessing-pipeline/condensed-colliders/'
 % Participant list of all participants that participated at least 3
 % sessions in the Seahaven - 90min
 
-PartList = {2002, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, 2006, 2007, 2013, 2014, 2021, 2020};
+PartList = {2002, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, 2006, 2007, 2013, 2014, 2021, 2020, 2025};
 %-------------------------------------------------------------------------------------------------
 
 % load overview fixated_vs_noise

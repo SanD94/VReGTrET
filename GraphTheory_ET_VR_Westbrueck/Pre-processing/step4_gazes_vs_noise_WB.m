@@ -32,7 +32,7 @@ savepath = '../noises-vs-gazes/';
 cd '../Data/preprocessing-pipeline/interpolated-colliders/';
 
 % 20 participants with 90 min VR trainging less than 30% data loss
-PartList = {2002, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, 2006, 2007, 2013, 2014, 2021, 2020};
+PartList = {2002, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, 2006, 2007, 2013, 2014, 2021, 2020, 2025};
 
 %----------------------------------------------------------------------------
 

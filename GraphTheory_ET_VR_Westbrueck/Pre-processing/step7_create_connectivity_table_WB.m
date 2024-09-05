@@ -3,9 +3,9 @@ data_path = fullfile("..", "Data", "preprocessing-pipeline", "graphs");
 
 
 % participants with VR training less than 30% data loss
-PartList = {2002, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, 2006, 2007, 2013, 2014, 2021, 2020};
+PartList = {2002, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, 2006, 2007, 2013, 2014, 2021, 2020, 2025};
 Group = ["Control","Control","Control","Control","Control","Control","Control","Control","Control", ...
-    "Glaucoma","Glaucoma","Glaucoma","Glaucoma","Glaucoma","Glaucoma"];
+    "Glaucoma","Glaucoma","Glaucoma","Glaucoma","Glaucoma","Glaucoma", "Glaucoma"];
 
 %-------------------------------------------------------------------------------
 
@@ -15,10 +15,12 @@ group = strings(Number, 1);
 inside_connectivity_mean = zeros(Number, 1);
 outside_connectivity_mean = zeros(Number, 1);
 xor_connectivity_mean = zeros(Number, 1);
+g_connectivity_mean = zeros(Number, 1);
 
 inside_connectivity_sd = zeros(Number, 1);
 outside_connectivity_sd = zeros(Number, 1);
 xor_connectivity_sd = zeros(Number, 1);
+g_connectivity_sd = zeros(Number, 1);
 
 
 for ii = 1:Number
@@ -32,12 +34,13 @@ for ii = 1:Number
     %%% main code
         
     % load data
-    load(subgraph_file_name); % iG, oG, xG
+    load(subgraph_file_name); % G, iG, oG, xG
     
     
     ic = centrality(iG, "degree");
     oc = centrality(oG, "degree");
     xc = centrality(xG, "degree");
+    gc = centrality(G, "degree");
 
     id(ii) = PartList{ii};
 
@@ -50,10 +53,14 @@ for ii = 1:Number
     inside_connectivity_mean(ii) = mean(ic);
     outside_connectivity_mean(ii) = mean(oc);
     xor_connectivity_mean(ii) = mean(xc);
+    g_connectivity_mean(ii) = mean(gc);
 
     inside_connectivity_sd(ii) = std(ic);
     outside_connectivity_sd(ii) = std(oc);
     xor_connectivity_sd(ii) = std(xc); % TODO : find proper definition
+    g_connectivity_sd(ii) = std(gc);
+
+
     group(ii) = Group(ii);
 end
 
@@ -63,9 +70,11 @@ connectivity_table.group = group;
 connectivity_table.inside_connectivity_mean = inside_connectivity_mean;
 connectivity_table.outside_connectivity_mean = outside_connectivity_mean;
 connectivity_table.xor_connectivity_mean = xor_connectivity_mean;
+connectivity_table.g_connectivity_mean = g_connectivity_mean;
 
 connectivity_table.inside_connectivity_sd = inside_connectivity_sd;
 connectivity_table.outside_connectivity_sd = inside_connectivity_sd;
 connectivity_table.xor_connectivity_sd = xor_connectivity_sd;
+connectivity_table.g_connectivity_std = g_connectivity_sd;
 
 writetable(connectivity_table, fullfile(data_path, "connectivity.csv"));

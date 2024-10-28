@@ -4,15 +4,14 @@
 % creates an overview of the amount of missing data in all files based on
 % the gaze validity bitmasks
 %% adjust the following variables: savepath, current folder and participant list!-----------
-savepathNewData = 'E:\Westbrueck Data\SpaRe_Data\1_Exploration\Pre-processsing_pipeline\rawData_with_renamedColliders\';
-savepathCondensedData = 'E:\Westbrueck Data\SpaRe_Data\1_Exploration\Pre-processsing_pipeline\condensedColliders\';
+savepathCondensedData = 'F:\big-data\vr_data\Data\preprocessing-pipeline\condensed-colliders';
 
-cd 'E:\Westbrueck Data\SpaRe_Data\1_Exploration\pre-processed_csv\'
+cd 'F:\big-data\vr_data\Data\preprocessed'
 
 % Participant list of all participants that participated 5 sessions x 30 min 
 % in Westbrook city
 
-PartList = {1004 1005 1008 1010 1011 1013 1017 1018 1019 1021 1022 1023 1054 1055 1056 1057 1058 1068 1069 1072 1073 1074 1075 1077 1079 1080};
+PartList = {2002, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, 2006, 2007, 2013, 2014, 2021, 2020, 2025};
 % PartList = {1004};
 
 
@@ -34,7 +33,7 @@ for indexPart = 1:Number
     
     
     % loop over recording sessions (should be 5 for each participant)
-    for indexSess = 1:5
+    for indexSess = 1:3
         tic
         % get eye tracking sessions and loop over them (amount of ET files
         % can vary
@@ -108,8 +107,8 @@ end
 
 
 % save missing data overview in both folders
-writetable(overviewMissingDataAll, [savepathNewData 'overviewMissingDataAll.csv']);
 writetable(overviewMissingDataAll, [savepathCondensedData 'overviewMissingDataAll.csv']);
+
 
 disp('saved overviews');
 
@@ -119,7 +118,6 @@ if height(missingFiles) > 0
     
     disp(strcat(height(missingFiles),' files were missing'));
 
-    writetable(missingFiles, [savepathNewData 'missingFiles.csv']);
     writetable(missingFiles, [savepathCondensedData 'missingFiles.csv']);
     disp('saved missing file list');
     

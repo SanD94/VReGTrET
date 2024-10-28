@@ -88,7 +88,7 @@ for ii = 1:Number
         
         % save information about distribution of gazes and noise
         % something was fixated when having more than 7 samples
-        gazes = housesTable.durations > 266.6;
+        gazes = housesTable.durations > 250;
 
         
         gazedObjects = housesTable(gazes,:);

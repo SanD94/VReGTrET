@@ -25,12 +25,12 @@ clear all;
 
 savepath = '../';
 
-cd '../Data/preprocessing-pipeline/condensed-colliders/'
+cd 'F:\big-data\vr_data\Data\preprocessing-pipeline\condensed-colliders\'
 
 % Participant list of all participants that participated at least 3
 % sessions in the Seahaven - 90min
 
-PartList = {2002, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, 2006, 2007, 2013, 2014, 2021, 2020, 2025};
+PartList = { 4003 4004 4005 4006 4007 4008 4009 4010 4011 4012 4013 4014 4015 4016 4017 4018 4019 4020 4021 4022 4023 4024 4025 4026 4028 4029 4031 4034 };
 %-------------------------------------------------------------------------------------------------
 
 % load overview fixated_vs_noise

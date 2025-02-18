@@ -31,7 +31,7 @@ savepath= 'E:\Westbrueck Data\SpaRe_Data\1_Exploration\Pre-processsing_pipeline\
 cd 'E:\Westbrueck Data\SpaRe_Data\1_Exploration\Pre-processsing_pipeline\gazes_vs_noise\';
 
 % 26 participants with 5x30min VR trainging less than 30% data loss
-PartList = {1004 1005 1008 1010 1011 1013 1017 1018 1019 1021 1022 1023 1054 1055 1056 1057 1058 1068 1069 1072 1073 1074 1075 1077 1079 1080};
+PartList = {5002};
 
 %-------------------------------------------------------------------------------
 

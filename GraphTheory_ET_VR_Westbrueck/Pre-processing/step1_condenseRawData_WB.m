@@ -33,7 +33,7 @@ cd 'F:\big-data\vr_data\Data\preprocessed'
 
 % Participant list of all participants that participated 5 sessions x 30 min 
 % in Westbrook city
-PartList = { 4003 4004 4005 4006 4007 4008 4009 4010 4011 4012 4013 4014 4015 4016 4017 4018 4019 4020 4021 4022 4023 4024 4025 4026 4028 4029 4031 4034 };
+PartList = { 5003 5004 };
 
 colliderList = readtable('../../additional_Files/building_collider_list.csv');
 

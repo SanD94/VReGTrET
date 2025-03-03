@@ -28,10 +28,10 @@ clear all;
 savepath= 'E:\Westbrueck Data\SpaRe_Data\1_Exploration\Pre-processsing_pipeline\graphs\';
 
 
-cd 'E:\Westbrueck Data\SpaRe_Data\1_Exploration\Pre-processsing_pipeline\gazes_vs_noise\';
+cd 'F:\big-data\vr_data\Data\preprocessing-pipeline\noises-vs-gazes\';
 
 % 26 participants with 5x30min VR trainging less than 30% data loss
-PartList = {5002};
+PartList = {5003 5004 };
 
 %-------------------------------------------------------------------------------
 

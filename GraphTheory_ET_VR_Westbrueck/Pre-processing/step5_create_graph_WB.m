@@ -29,7 +29,7 @@ data_path = "F:\big-data\vr_data\Data\preprocessing-pipeline\noises-vs-gazes";
 
 
 % participants with VR training less than 30% data loss
-PartList = { 4003 4004 4005 4006 4007 4008 4009 4010 4011 4012 4013 4014 4015 4016 4017 4018 4019 4020 4021 4022 4023 4024 4025 4026 4028 4029 4031 4034 };
+PartList = {  5003 5004  };
 
 
 %-------------------------------------------------------------------------------

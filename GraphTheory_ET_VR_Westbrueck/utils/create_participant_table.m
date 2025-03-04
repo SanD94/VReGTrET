@@ -1,3 +1,4 @@
+% Currently supports participant IDs in 4Ks
 function participant_table = create_participant_table(folder_path)
     % Creates a table of participant IDs and categories from filenames
     %

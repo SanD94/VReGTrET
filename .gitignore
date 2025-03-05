@@ -12,7 +12,6 @@
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
 .virtual_documents/
-resources/
 
 # IPython
 profile_default/

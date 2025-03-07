@@ -36,7 +36,7 @@ cd 'F:\big-data\vr_data\Data\preprocessing-pipeline\condensed-colliders\';
 
 %% main code
  
-PartList = { 5003 5004 };
+PartList = {  5005 5006  };
 
 Number = length(PartList);
 noFilePartList = [Number];

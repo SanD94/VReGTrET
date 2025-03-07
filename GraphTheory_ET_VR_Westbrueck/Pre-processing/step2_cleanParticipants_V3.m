@@ -30,7 +30,7 @@ cd 'F:\big-data\vr_data\Data\preprocessing-pipeline\condensed-colliders\'
 % Participant list of all participants that participated at least 3
 % sessions in the Seahaven - 90min
 
-PartList = { 5003 5004 };
+PartList = { 5005 5006 };
 %-------------------------------------------------------------------------------------------------
 
 % load overview fixated_vs_noise

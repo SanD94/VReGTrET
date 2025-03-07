@@ -32,7 +32,7 @@ savepath = '../noises-vs-gazes/';
 cd 'F:\big-data\vr_data\Data\preprocessing-pipeline\interpolated-colliders\';
 
 % 20 participants with 90 min VR trainging less than 30% data loss
-PartList = { 5003 5004 };
+PartList = {  5005 5006 };
 
 %----------------------------------------------------------------------------
 

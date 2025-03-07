@@ -36,7 +36,7 @@ cd 'F:\big-data\vr_data\Data\preprocessing-pipeline\graphs\'
 
 
 % 20 participants with 90 min VR trainging less than 30% data loss
-PartList = {5002 5003 5004};
+PartList = {5005 5006};
 
 % can be also adjusted to change the color map for the node degree
 % visualization

@@ -1,24 +1,3 @@
-%% ------------------ step5_optional_create_Graphs_WB----------------------
-
-% --------------------script written by Jasmin L. Walter-------------------
-% -----------------------jawalter@uni-osnabrueck.de------------------------
-
-% Description: 
-% 5th and last step of preprocessing pipeline.
-% The script creates the gaze graphs from the gaze events
-% The script creates unweighted and binary graph objects the gaze events. 
-% To achieve this it removes all repetition and self references from graphs
-% and removes noData node after creation of graph
-
-% Input:  
-% {PID}_gazes_data_WB.mat = a new data file containing all gazes
-
-% Output:
-% {PID}_Graph_WB.mat = the gaze graph object for every participant
-% Missing_Participant_Files = contains all participant numbers where the
-%                                  data file could not be loaded
-
-
 clear all;
 
 %% adjust the following variables: savepath, current folder and participant list!-----------

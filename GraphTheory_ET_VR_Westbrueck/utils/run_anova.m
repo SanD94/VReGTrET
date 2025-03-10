@@ -1,0 +1,33 @@
+function run_anova(data, groups)
+% 1. Test for normality (Shapiro-Wilk equivalent in MATLAB)
+
+fprintf('Normality Tests:\n');
+for i = unique(groups)'
+    groupData = data(groups == i);
+    [h, p] = lillietest(groupData);
+    fprintf('Group %s: p = %.4f, %s\n', i, p, iif(h==0, 'Normal', 'Not normal'));
+end
+
+% 2. Test for homogeneity of variance (Levene's test)
+% Using a function for Levene's test
+fprintf('\nHomogeneity of Variance Test:\n');
+[p, stats] = vartestn(data, groups, 'TestType', 'LeveneAbsolute');
+fprintf('Levene test: p = %.4f, %s\n', p, iif(p>0.05, 'Equal variances', 'Unequal variances'));
+
+% 3. Run one-way ANOVA
+fprintf('\nANOVA Results:\n');
+[p, tbl, stats] = anova1(data, groups);
+
+% 4. Post-hoc test (if ANOVA is significant)
+if p < 0.05
+    fprintf('\nPost-hoc Multiple Comparisons (Tukey-Kramer):\n');
+    c = multcompare(stats);
+    % c contains: group i, group j, lower limit, mean, upper limit, p-value
+    fprintf('Group comparisons:\n');
+    fprintf('Group i\tGroup j\tLower\tDifference\tUpper\tp-value\n');
+    for i = 1:size(c, 1)
+        fprintf('%d\t%d\t%.2f\t%.2f\t\t%.2f\t%.4f\n', c(i,1), c(i,2), c(i,3), c(i,4), c(i,5), c(i,6));
+    end
+end
+
+end

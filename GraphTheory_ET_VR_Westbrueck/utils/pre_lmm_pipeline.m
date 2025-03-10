@@ -11,11 +11,12 @@ function pre_lmm_pipeline(tbl, responseVar, fixedEffect, randomEffect)
     
     %% 1. Check Normality of Residuals
     % Fit a Linear Mixed Model
-    lme = fitlme(tbl, sprintf('%s ~ %s + (1|%s)', responseVar, fixedEffect, randomEffect));
+    lme = fitglme(tbl, sprintf('%s ~ %s + (1|%s)', responseVar, fixedEffect, randomEffect), 'Distribution', 'InverseGaussian', 'Link', 'log');
     
     % Get residuals and perform Shapiro-Wilk test for normality
-    residuals = residuals(lme);
-    [h, pNormality] = swtest(residuals);
+    residuals = lme.Residuals{:, 1};
+
+    [h, pNormality] = lillietest(residuals);
     
     if pNormality < 0.05
         disp('Residuals are NOT normally distributed (p < 0.05). Consider transforming the data.');
@@ -24,7 +25,7 @@ function pre_lmm_pipeline(tbl, responseVar, fixedEffect, randomEffect)
     end
     
     %% 2. Check Homogeneity of Variance (Levene’s Test)
-    [pLevene,~,statsLevene] = vartestn(tbl.Response, tbl.(fixedEffect), 'TestType', 'LeveneAbsolute');
+    [pLevene, ~] = vartestn(tbl.(responseVar), tbl.(fixedEffect), 'TestType', 'LeveneAbsolute');
     
     if pLevene < 0.05
         disp('Variances are NOT equal across groups (p < 0.05). Consider data transformation or using fitglme.');
@@ -34,11 +35,11 @@ function pre_lmm_pipeline(tbl, responseVar, fixedEffect, randomEffect)
     
     %% 3. Check for Outliers
     disp('Visualizing potential outliers with a boxplot...');
-    boxplot(tbl.Response, tbl.(fixedEffect));
+    boxplot(tbl.(responseVar), tbl.(fixedEffect));
     
     %% 4. Check for Multicollinearity (Variance Inflation Factor)
     disp('Checking for multicollinearity between predictors...');
-    X = dummyvar(tbl.(fixedEffect)); % Create dummy variables for the fixed effect
+    X = dummyvar(categorical(tbl.(fixedEffect))); % Create dummy variables for the fixed effect
     VIF = diag(inv(corrcoef(X)))'; % Calculate Variance Inflation Factor
     disp('Variance Inflation Factors (VIF):');
     disp(VIF);
@@ -54,11 +55,11 @@ function pre_lmm_pipeline(tbl, responseVar, fixedEffect, randomEffect)
     disp('Checking if random effects significantly improve the model...');
     
     % Fit model without random effects
-    lme_no_random = fitlme(tbl, sprintf('%s ~ %s', responseVar, fixedEffect));
+    lme_no_random = fitglme(tbl, sprintf('%s ~ %s', responseVar, fixedEffect), 'Distribution', 'InverseGaussian', 'Link', 'log');
     
     % Compare models using likelihood ratio test
-    [pLRT, LRT] = compare(lme_no_random, lme);
-    if pLRT < 0.05
+    siminfo = compare(lme_no_random, lme);
+    if siminfo.pValue < 0.05
         disp('Random effects significantly improve the model (p < 0.05).');
     else
         disp('No significant improvement from random effects.');

@@ -41,7 +41,7 @@ function [model_result, model_summary] = fit_and_interpret_glme(data, formula, d
     
     % Collect key statistics
     fixed_effects = model_result.Coefficients;
-    random_effects = model_result.RandomEffects;
+    random_effects = randomEffects(model_result);
     
     % Calculate AIC, BIC
     aic_value = model_result.ModelCriterion.AIC;

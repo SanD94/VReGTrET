@@ -1,4 +1,5 @@
 % written by claude sonnet 3.7 concise
+% TODO: consider multiple predictor vars and grouping vars
 function test_results = run_glme_preliminary_tests(data, response_var, predictor_vars, grouping_var)
     % RUN_GLME_PRELIMINARY_TESTS Performs preliminary tests before fitting GLME models
     %

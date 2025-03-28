@@ -133,12 +133,5 @@ function [model_result, model_summary] = fit_and_interpret_glme(data, formula, d
         for i = 1:length(interpretations)
             disp([coef_names{i} ': ' interpretations{i}]);
         end
-        
-        % Display random effects summary
-        if ~isempty(random_effects)
-            disp('');
-            disp('=== Random Effects ===');
-            disp(random_effects);
-        end
     end
 end

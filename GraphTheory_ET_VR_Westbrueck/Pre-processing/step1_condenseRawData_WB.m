@@ -13,7 +13,7 @@
 
 % Input: 
 % uses 1004_Expl_S_1_ET_1_flattened.csv file
-% Output: 
+Output: 
 % condensedColliders_WB.mat     = new data files with each row containing 
 %                                 the data of a hit point cluster
 % OverviewAnalysis.mat          = summary of number and percentage of data

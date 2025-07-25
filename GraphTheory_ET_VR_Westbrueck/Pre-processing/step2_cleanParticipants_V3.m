@@ -25,7 +25,7 @@ clear all;
 
 savepath = '../';
 
-cd 'F:\big-data\vr_data\Data\preprocessing-pipeline\condensed-colliders\'
+cd 'D:\big-data\2025-westbrueck\preprocessing-pipeline\condensed-colliders\'
 
 % Participant list of all participants that participated at least 3
 % sessions in the Seahaven - 90min

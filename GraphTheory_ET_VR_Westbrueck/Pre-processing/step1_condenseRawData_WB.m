@@ -13,7 +13,6 @@
 
 % Input: 
 % uses 1004_Expl_S_1_ET_1_flattened.csv file
-Output: 
 % condensedColliders_WB.mat     = new data files with each row containing 
 %                                 the data of a hit point cluster
 % OverviewAnalysis.mat          = summary of number and percentage of data
@@ -29,7 +28,7 @@ clear all;
 savepathNewData = '../preprocessing-pipeline/renamed-colliders/';
 savepathCondensedData = '../preprocessing-pipeline/condensed-colliders/';
 
-cd 'F:\big-data\vr_data\Data\preprocessed'
+cd 'D:\big-data\2025-westbrueck\preprocessed'
 
 % Participant list of all participants that participated 5 sessions x 30 min 
 % in Westbrook city

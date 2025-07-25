@@ -3,12 +3,13 @@ clear all;
 %% adjust the following variables: savepath, current folder and participant list!-----------
 
 COLLIDER_FILE = fullfile("additional_Files", "building_collider_list.csv");
-savepath= "F:\big-data\vr_data\Data\preprocessing-pipeline\graphs";
-data_path = "F:\big-data\vr_data\Data\preprocessing-pipeline\noises-vs-gazes";
+savepath= "D:\big-data\2025-westbrueck\preprocessing-pipeline\graphs";
+data_path = "D:\big-data\2025-westbrueck\preprocessing-pipeline\noises-vs-gazes";
 
 
 % participants with VR training less than 30% data loss
-PartList = {  5005 5006   };
+PartList = {  2002, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, ... % control
+        2006, 2007, 2013, 2014, 2021, 2020, 2025, 5005, 5006   };
 
 
 %-------------------------------------------------------------------------------

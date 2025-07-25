@@ -27,7 +27,7 @@ clear all;
 
 savepath = '../condensed-colliders-combined/';
 
-cd 'F:\big-data\vr_data\Data\preprocessing-pipeline\condensed-colliders\';
+cd 'D:\big-data\2025-westbrueck\preprocessing-pipeline\condensed-colliders\';
 
 % load list that contains the participant numbers belonging together sorted
 % into the different sessions (this list here is uploaded with the other

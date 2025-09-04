@@ -19,6 +19,16 @@ PartList = { ...
     4021, 4022, 4023, 4024, 4026, 4029, 4031, 4034 ...
 };
 %-------------------------------------------------------------------------------
+% it's written by hand by checking the raw data.
+sess_list = { ... // same order with partlist
+    [1, 1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3], ...
+    [1, 2, 3], [1, 2, 3], [1, 2, 2, 3, 3], [1, 1, 2, 3], ...
+    [1, 2, 3], [1, 2, 2, 3], [1, 2, 2, 3], [1, 2, 3], ...
+    [1, 2, 3], [1, 2, 2, 3, 3], [1, 2, 3], [1, 2, 2, 3], ...
+    [1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3], ...
+    [1, 2, 3], [1, 2, 3], [1, 1, 1, 2, 3], [1, 2, 3] ...
+};
+
 
 Number = length(PartList);
 noFilePartList = [];
@@ -30,6 +40,7 @@ bad_nodes = ["noData", "newSession"];
 for ii = 1:Number
     G = get_full_graph(COLLIDER_FILE, true);
     currentPart = cell2mat(PartList(ii));
+    cur_sessions = sess_list{ii};
     
     
     file = fullfile(data_path, ...
@@ -53,38 +64,28 @@ for ii = 1:Number
     q_nohouse = strcmp(gaze_seq_order,"NH");
     gaze_seq_order(q_nohouse) = [];
 
-    elem_x = zeros(length(gaze_seq_order)-1, 1);
-    elem_y = zeros(length(gaze_seq_order)-1, 1);
-    cur = 0;
+    sess_idx = 1;
+    
     for i = 1:(length(gaze_seq_order)-1)
         fi = gaze_seq_order(i);
         se = gaze_seq_order(i + 1);
-        G = addedge(G, fi, se);
+        if strcmp(se, "newSession")
+            disp(cur_sessions(sess_idx));
+            cur_G = G;
+            cur_G = simplify(cur_G);
+            cur_G = rmnode(cur_G, bad_nodes(1));
+            cur_G = rmnode(cur_G, bad_nodes(2));
+            save(fullfile(savepath(cur_sessions(sess_idx)), [num2str(currentPart) '_Graph_WB.mat']), 'cur_G');
+            sess_idx = sess_idx + 1;
+        end
         
+        G = addedge(G, fi, se);
     end
-    
-
-    elem_x = elem_x / length(elem_x);
-    % elem_y = elem_y / height(G.Edges);
-    G = simplify(G);
-      
-    %% remove node noData and newSession from graph
-    G = rmnode(G, 'noData');
-    G = rmnode(G, 'newSession');
-    
-
-    
-    %% save graph
-    save(fullfile(savepath, [num2str(currentPart) '_saturation_WB.mat']), 'currentPart', 'elem_x', 'elem_y');
-    %%%
 
 end
 
 
 disp(strcat(num2str(Number), ' Participants analysed'));
 disp(strcat(num2str(countMissingPart),' files were missing'));
-
-csvwrite(fullfile(savepath, 'Missing_Participant_Files'),noFilePartList);
-disp('saved missing participant file list');
 
 disp('done');

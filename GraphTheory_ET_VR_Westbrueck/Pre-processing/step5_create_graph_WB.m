@@ -8,7 +8,7 @@ data_path = "D:\big-data\2025-westbrueck\preprocessing-pipeline\noises-vs-gazes"
 
 
 % participants with VR training less than 30% data loss
-PartList = {  2002, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, ... % control
+PartList = {  4003, 2005, 2008, 2009, 2015, 2016, 2017, 2018, 2024, ... % control
         2006, 2007, 2013, 2014, 2021, 2020, 2025, 5005, 5006   };
 
 

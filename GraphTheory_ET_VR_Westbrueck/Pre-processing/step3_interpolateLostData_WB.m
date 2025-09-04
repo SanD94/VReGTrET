@@ -29,7 +29,7 @@ savepath = '../interpolated-colliders/';
 
 cd 'D:\big-data\2025-westbrueck\preprocessing-pipeline\condensed-colliders-combined\'
 
-PartList = {   5005 5006   };
+PartList = {   4009   };
 
 
 % --------------------------------------------------------------------------

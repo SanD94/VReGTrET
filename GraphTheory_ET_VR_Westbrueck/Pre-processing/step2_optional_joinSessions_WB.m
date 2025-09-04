@@ -36,7 +36,7 @@ cd 'D:\big-data\2025-westbrueck\preprocessing-pipeline\condensed-colliders\';
 
 %% main code
  
-PartList = {  5005 5006  };
+PartList = {  4009  };
 
 Number = length(PartList);
 noFilePartList = [Number];
@@ -55,7 +55,7 @@ for indexPart = 1:Number
         
     
     % loop over recording sessions (should be 5 for each participant)
-    for indexSess = 1
+    for indexSess = 2
         tic
         % get eye tracking sessions and loop over them (amount of ET files
         % can vary

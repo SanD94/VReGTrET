@@ -10,6 +10,7 @@ init_library <- function() {
     library(ggeffects)
     library(scales)
     library(cli)
+    library(here)
 
     cli_alert_success("Libraries are loaded")
 }

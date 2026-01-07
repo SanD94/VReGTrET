@@ -1,1 +1,4 @@
 *.png
+playground_output/
+output/
+playground.ipynb

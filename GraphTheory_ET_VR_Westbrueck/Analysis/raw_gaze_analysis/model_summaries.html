@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+
+
+</head>
+<body>
+<div id="tlidylsgym" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+  <style>#tlidylsgym table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#tlidylsgym thead, #tlidylsgym tbody, #tlidylsgym tfoot, #tlidylsgym tr, #tlidylsgym td, #tlidylsgym th {
+  border-style: none;
+}
+
+#tlidylsgym p {
+  margin: 0;
+  padding: 0;
+}
+
+#tlidylsgym .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tlidylsgym .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tlidylsgym .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tlidylsgym .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tlidylsgym .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tlidylsgym .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tlidylsgym .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tlidylsgym .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tlidylsgym .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tlidylsgym .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tlidylsgym .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tlidylsgym .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tlidylsgym .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tlidylsgym .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#tlidylsgym .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tlidylsgym .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tlidylsgym .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tlidylsgym .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tlidylsgym .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tlidylsgym .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tlidylsgym .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tlidylsgym .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tlidylsgym .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tlidylsgym .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#tlidylsgym .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tlidylsgym .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tlidylsgym .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tlidylsgym .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tlidylsgym .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tlidylsgym .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tlidylsgym .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tlidylsgym .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tlidylsgym .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tlidylsgym .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tlidylsgym .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tlidylsgym .gt_left {
+  text-align: left;
+}
+
+#tlidylsgym .gt_center {
+  text-align: center;
+}
+
+#tlidylsgym .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tlidylsgym .gt_font_normal {
+  font-weight: normal;
+}
+
+#tlidylsgym .gt_font_bold {
+  font-weight: bold;
+}
+
+#tlidylsgym .gt_font_italic {
+  font-style: italic;
+}
+
+#tlidylsgym .gt_super {
+  font-size: 65%;
+}
+
+#tlidylsgym .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#tlidylsgym .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tlidylsgym .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#tlidylsgym .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#tlidylsgym .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tlidylsgym .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tlidylsgym .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#tlidylsgym .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#tlidylsgym div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+  <table class="gt_table" style="table-layout:fixed;width:0px;" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <colgroup>
+    <col style="width:200px;"/>
+    <col style="width:200px;"/>
+    <col style="width:200px;"/>
+    <col style="width:200px;"/>
+    <col style="width:200px;"/>
+    <col style="width:200px;"/>
+    <col style="width:200px;"/>
+  </colgroup>
+  <thead>
+    <tr class="gt_col_headings gt_spanner_row">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="model_name"><span class='gt_from_md'><strong>Model Name</strong></span></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" style="border-right-width: 2px; border-right-style: solid; border-right-color: black; border-left-width: 2px; border-left-style: solid; border-left-color: black;" scope="colgroup" id="dwell_time_models">
+        <div class="gt_column_spanner"><span class='gt_from_md'><strong>Dwell Time Models (inverse-link)<br>Gamma Mixed Models</strong></span></div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="**NDC Models (log-link)&lt;br&gt;Poisson Mixed Models**">
+        <div class="gt_column_spanner"><span class='gt_from_md'><strong>NDC Models (log-link)<br>Poisson Mixed Models</strong></span></div>
+      </th>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-left-width: 2px; border-left-style: solid; border-left-color: black;" scope="col" id="dw_null_model"><span class='gt_from_md'><strong>Null Model</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="dw_inter_model"><span class='gt_from_md'><strong>Intermediate Model</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-right-width: 2px; border-right-style: solid; border-right-color: black;" scope="col" id="dw_full_model"><span class='gt_from_md'><strong>Full Model</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="node_null_model"><span class='gt_from_md'><strong>Null Model</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="node_inter_model"><span class='gt_from_md'><strong>Intermediate Model</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="node_full_model"><span class='gt_from_md'><strong>Full Model</strong></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="model_name" class="gt_row gt_left"><span class='gt_from_md'><strong>LRT</strong></span></td>
+<td headers="dw_null_model" class="gt_row gt_center" style="border-left-width: 2px; border-left-style: solid; border-left-color: black;"><span class='gt_from_md'>—</span></td>
+<td headers="dw_inter_model" class="gt_row gt_center"><span class='gt_from_md'><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>χ</mi><mn>2</mn></msup><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\chi^2(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">χ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span> = 13.49, <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span></span></span></span> &lt; .001***</span></td>
+<td headers="dw_full_model" class="gt_row gt_center" style="border-right-width: 2px; border-right-style: solid; border-right-color: black;"><span class='gt_from_md'><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>χ</mi><mn>2</mn></msup><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\chi^2(2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">χ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">2</span><span class="mclose">)</span></span></span></span> = 14.99, <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span></span></span></span> &lt; .001***</span></td>
+<td headers="node_null_model" class="gt_row gt_center"><span class='gt_from_md'>—</span></td>
+<td headers="node_inter_model" class="gt_row gt_center"><span class='gt_from_md'><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>χ</mi><mn>2</mn></msup><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\chi^2(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">χ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span> = 66.55, <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span></span></span></span> &lt; .001***</span></td>
+<td headers="node_full_model" class="gt_row gt_center"><span class='gt_from_md'><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>χ</mi><mn>2</mn></msup><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\chi^2(2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">χ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">2</span><span class="mclose">)</span></span></span></span> = 2.96, <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span></span></span></span> = 0.23</span></td></tr>
+    <tr><td headers="model_name" class="gt_row gt_left"><span class='gt_from_md'><em><strong>fixed effects</strong></em></span></td>
+<td headers="dw_null_model" class="gt_row gt_center" style="border-left-width: 2px; border-left-style: solid; border-left-color: black;"><span class='gt_from_md'><em>b</em> [95% CI]</span></td>
+<td headers="dw_inter_model" class="gt_row gt_center"><span class='gt_from_md'><em>b</em> [95% CI]</span></td>
+<td headers="dw_full_model" class="gt_row gt_center" style="border-right-width: 2px; border-right-style: solid; border-right-color: black;"><span class='gt_from_md'><em>b</em> [95% CI]</span></td>
+<td headers="node_null_model" class="gt_row gt_center"><span class='gt_from_md'><em>b</em> [95% CI]</span></td>
+<td headers="node_inter_model" class="gt_row gt_center"><span class='gt_from_md'><em>b</em> [95% CI]</span></td>
+<td headers="node_full_model" class="gt_row gt_center"><span class='gt_from_md'><em>b</em> [95% CI]</span></td></tr>
+    <tr><td headers="model_name" class="gt_row gt_left"><span class='gt_from_md'>intercept</span></td>
+<td headers="dw_null_model" class="gt_row gt_center" style="border-left-width: 2px; border-left-style: solid; border-left-color: black;"><span class='gt_from_md'>2.418 [2.242, 2.595]</span></td>
+<td headers="dw_inter_model" class="gt_row gt_center"><span class='gt_from_md'>2.511 [2.33, 2.692]</span></td>
+<td headers="dw_full_model" class="gt_row gt_center" style="border-right-width: 2px; border-right-style: solid; border-right-color: black;"><span class='gt_from_md'>2.499 [2.318, 2.68]</span></td>
+<td headers="node_null_model" class="gt_row gt_center"><span class='gt_from_md'>1.315 [1.151, 1.479]</span></td>
+<td headers="node_inter_model" class="gt_row gt_center"><span class='gt_from_md'>1.037 [0.872, 1.201]</span></td>
+<td headers="node_full_model" class="gt_row gt_center"><span class='gt_from_md'>1.171 [0.953, 1.39]</span></td></tr>
+    <tr><td headers="model_name" class="gt_row gt_left"><span class='gt_from_md'>region (inside)</span></td>
+<td headers="dw_null_model" class="gt_row gt_center" style="border-left-width: 2px; border-left-style: solid; border-left-color: black;"><span class='gt_from_md'>—</span></td>
+<td headers="dw_inter_model" class="gt_row gt_center"><span class='gt_from_md'>-0.355 [-0.544, -0.167]</span></td>
+<td headers="dw_full_model" class="gt_row gt_center" style="border-right-width: 2px; border-right-style: solid; border-right-color: black;"><span class='gt_from_md'>-0.354 [-0.543, -0.166]</span></td>
+<td headers="node_null_model" class="gt_row gt_center"><span class='gt_from_md'>—</span></td>
+<td headers="node_inter_model" class="gt_row gt_center"><span class='gt_from_md'>0.868 [0.677, 1.059]</span></td>
+<td headers="node_full_model" class="gt_row gt_center"><span class='gt_from_md'>0.868 [0.677, 1.059]</span></td></tr>
+    <tr><td headers="model_name" class="gt_row gt_left"><span class='gt_from_md'>view (peripheral)</span></td>
+<td headers="dw_null_model" class="gt_row gt_center" style="border-left-width: 2px; border-left-style: solid; border-left-color: black;"><span class='gt_from_md'>—</span></td>
+<td headers="dw_inter_model" class="gt_row gt_center"><span class='gt_from_md'>—</span></td>
+<td headers="dw_full_model" class="gt_row gt_center" style="border-right-width: 2px; border-right-style: solid; border-right-color: black;"><span class='gt_from_md'>-0.3 [-0.486, -0.113]</span></td>
+<td headers="node_null_model" class="gt_row gt_center"><span class='gt_from_md'>—</span></td>
+<td headers="node_inter_model" class="gt_row gt_center"><span class='gt_from_md'>—</span></td>
+<td headers="node_full_model" class="gt_row gt_center"><span class='gt_from_md'>-0.211 [-0.47, 0.048]</span></td></tr>
+    <tr><td headers="model_name" class="gt_row gt_left"><span class='gt_from_md'>view (central)</span></td>
+<td headers="dw_null_model" class="gt_row gt_center" style="border-left-width: 2px; border-left-style: solid; border-left-color: black;"><span class='gt_from_md'>—</span></td>
+<td headers="dw_inter_model" class="gt_row gt_center"><span class='gt_from_md'>—</span></td>
+<td headers="dw_full_model" class="gt_row gt_center" style="border-right-width: 2px; border-right-style: solid; border-right-color: black;"><span class='gt_from_md'>0.187 [0.004, 0.371]</span></td>
+<td headers="node_null_model" class="gt_row gt_center"><span class='gt_from_md'>—</span></td>
+<td headers="node_inter_model" class="gt_row gt_center"><span class='gt_from_md'>—</span></td>
+<td headers="node_full_model" class="gt_row gt_center"><span class='gt_from_md'>-0.193 [-0.452, 0.065]</span></td></tr>
+    <tr><td headers="model_name" class="gt_row gt_left"><span class='gt_from_md'><em><strong>random effects</strong></em></span></td>
+<td headers="dw_null_model" class="gt_row gt_center" style="border-left-width: 2px; border-left-style: solid; border-left-color: black;"><span class='gt_from_md'><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>σ</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></td>
+<td headers="dw_inter_model" class="gt_row gt_center"><span class='gt_from_md'><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>σ</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></td>
+<td headers="dw_full_model" class="gt_row gt_center" style="border-right-width: 2px; border-right-style: solid; border-right-color: black;"><span class='gt_from_md'><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>σ</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></td>
+<td headers="node_null_model" class="gt_row gt_center"><span class='gt_from_md'><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>σ</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></td>
+<td headers="node_inter_model" class="gt_row gt_center"><span class='gt_from_md'><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>σ</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></td>
+<td headers="node_full_model" class="gt_row gt_center"><span class='gt_from_md'><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>σ</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></td></tr>
+    <tr><td headers="model_name" class="gt_row gt_left"><span class='gt_from_md'>building</span></td>
+<td headers="dw_null_model" class="gt_row gt_center" style="border-left-width: 2px; border-left-style: solid; border-left-color: black;"><span class='gt_from_md'>0.093</span></td>
+<td headers="dw_inter_model" class="gt_row gt_center"><span class='gt_from_md'>0.082</span></td>
+<td headers="dw_full_model" class="gt_row gt_center" style="border-right-width: 2px; border-right-style: solid; border-right-color: black;"><span class='gt_from_md'>0.081</span></td>
+<td headers="node_null_model" class="gt_row gt_center"><span class='gt_from_md'>0.393</span></td>
+<td headers="node_inter_model" class="gt_row gt_center"><span class='gt_from_md'>0.221</span></td>
+<td headers="node_full_model" class="gt_row gt_center"><span class='gt_from_md'>0.221</span></td></tr>
+    <tr><td headers="model_name" class="gt_row gt_left"><span class='gt_from_md'>participant</span></td>
+<td headers="dw_null_model" class="gt_row gt_center" style="border-left-width: 2px; border-left-style: solid; border-left-color: black;"><span class='gt_from_md'>0.031</span></td>
+<td headers="dw_inter_model" class="gt_row gt_center"><span class='gt_from_md'>0.032</span></td>
+<td headers="dw_full_model" class="gt_row gt_center" style="border-right-width: 2px; border-right-style: solid; border-right-color: black;"><span class='gt_from_md'>0.014</span></td>
+<td headers="node_null_model" class="gt_row gt_center"><span class='gt_from_md'>0.077</span></td>
+<td headers="node_inter_model" class="gt_row gt_center"><span class='gt_from_md'>0.077</span></td>
+<td headers="node_full_model" class="gt_row gt_center"><span class='gt_from_md'>0.067</span></td></tr>
+    <tr><td headers="model_name" class="gt_row gt_left"><span class='gt_from_md'>observation-level<br>  (distribution-specific)</span></td>
+<td headers="dw_null_model" class="gt_row gt_center" style="border-left-width: 2px; border-left-style: solid; border-left-color: black;"><span class='gt_from_md'>0.139</span></td>
+<td headers="dw_inter_model" class="gt_row gt_center"><span class='gt_from_md'>0.137</span></td>
+<td headers="dw_full_model" class="gt_row gt_center" style="border-right-width: 2px; border-right-style: solid; border-right-color: black;"><span class='gt_from_md'>0.136</span></td>
+<td headers="node_null_model" class="gt_row gt_center"><span class='gt_from_md'>—</span></td>
+<td headers="node_inter_model" class="gt_row gt_center"><span class='gt_from_md'>—</span></td>
+<td headers="node_full_model" class="gt_row gt_center"><span class='gt_from_md'>—</span></td></tr>
+    <tr><td headers="model_name" class="gt_row gt_left"><span class='gt_from_md'><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>R</mi><mrow><mi>G</mi><mi>L</mi><mi>M</mi><mi>M</mi><mo stretchy="false">(</mo><mi>m</mi><mo stretchy="false">)</mo></mrow><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">R^2_{GLMM(m)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3111em;vertical-align:-0.497em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-2.378em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">G</span><span class="mord mathnormal mtight">L</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">MM</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">m</span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.497em;"><span></span></span></span></span></span></span></span></span></span> (%)</span></td>
+<td headers="dw_null_model" class="gt_row gt_center" style="border-left-width: 2px; border-left-style: solid; border-left-color: black;"><span class='gt_from_md'>—</span></td>
+<td headers="dw_inter_model" class="gt_row gt_center"><span class='gt_from_md'>11.19</span></td>
+<td headers="dw_full_model" class="gt_row gt_center" style="border-right-width: 2px; border-right-style: solid; border-right-color: black;"><span class='gt_from_md'>23.31</span></td>
+<td headers="node_null_model" class="gt_row gt_center"><span class='gt_from_md'>—</span></td>
+<td headers="node_inter_model" class="gt_row gt_center"><span class='gt_from_md'>27.8</span></td>
+<td headers="node_full_model" class="gt_row gt_center"><span class='gt_from_md'>28.96</span></td></tr>
+    <tr><td headers="model_name" class="gt_row gt_left"><span class='gt_from_md'><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>R</mi><mrow><mi>G</mi><mi>L</mi><mi>M</mi><mi>M</mi><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">R^2_{GLMM(c)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3111em;vertical-align:-0.497em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-2.378em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">G</span><span class="mord mathnormal mtight">L</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">MM</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">c</span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.497em;"><span></span></span></span></span></span></span></span></span></span> (%)</span></td>
+<td headers="dw_null_model" class="gt_row gt_center" style="border-left-width: 2px; border-left-style: solid; border-left-color: black;"><span class='gt_from_md'>—</span></td>
+<td headers="dw_inter_model" class="gt_row gt_center"><span class='gt_from_md'>51.45</span></td>
+<td headers="dw_full_model" class="gt_row gt_center" style="border-right-width: 2px; border-right-style: solid; border-right-color: black;"><span class='gt_from_md'>54.93</span></td>
+<td headers="node_null_model" class="gt_row gt_center"><span class='gt_from_md'>—</span></td>
+<td headers="node_inter_model" class="gt_row gt_center"><span class='gt_from_md'>71.61</span></td>
+<td headers="node_full_model" class="gt_row gt_center"><span class='gt_from_md'>71.54</span></td></tr>
+    <tr><td headers="model_name" class="gt_row gt_left"><span class='gt_from_md'><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mi>C</mi><msub><mi>C</mi><mrow><mo stretchy="false">[</mo><mi>B</mi><mi>u</mi><mi>i</mi><mi>l</mi><mi>d</mi><mi>i</mi><mi>n</mi><mi>g</mi><mo stretchy="false">]</mo></mrow></msub></mrow><annotation encoding="application/x-tex">ICC_{[Building]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0385em;vertical-align:-0.3552em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.5198em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">[</span><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">in</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">g</span><span class="mclose mtight">]</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3552em;"><span></span></span></span></span></span></span></span></span></span> (%)</span></td>
+<td headers="dw_null_model" class="gt_row gt_center" style="border-left-width: 2px; border-left-style: solid; border-left-color: black;"><span class='gt_from_md'>35.32</span></td>
+<td headers="dw_inter_model" class="gt_row gt_center"><span class='gt_from_md'>32.62</span></td>
+<td headers="dw_full_model" class="gt_row gt_center" style="border-right-width: 2px; border-right-style: solid; border-right-color: black;"><span class='gt_from_md'>34.99</span></td>
+<td headers="node_null_model" class="gt_row gt_center"><span class='gt_from_md'>59.32</span></td>
+<td headers="node_inter_model" class="gt_row gt_center"><span class='gt_from_md'>45.05</span></td>
+<td headers="node_full_model" class="gt_row gt_center"><span class='gt_from_md'>45.91</span></td></tr>
+    <tr><td headers="model_name" class="gt_row gt_left"><span class='gt_from_md'><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mi>C</mi><msub><mi>C</mi><mrow><mo stretchy="false">[</mo><mi>P</mi><mi>a</mi><mi>r</mi><mi>t</mi><mi>i</mi><mi>c</mi><mi>i</mi><mi>p</mi><mi>a</mi><mi>n</mi><mi>t</mi><mo stretchy="false">]</mo></mrow></msub></mrow><annotation encoding="application/x-tex">ICC_{[Participant]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0385em;vertical-align:-0.3552em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.5198em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">[</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">P</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight">an</span><span class="mord mathnormal mtight">t</span><span class="mclose mtight">]</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3552em;"><span></span></span></span></span></span></span></span></span></span> (%)</span></td>
+<td headers="dw_null_model" class="gt_row gt_center" style="border-left-width: 2px; border-left-style: solid; border-left-color: black;"><span class='gt_from_md'>11.94</span></td>
+<td headers="dw_inter_model" class="gt_row gt_center"><span class='gt_from_md'>12.72</span></td>
+<td headers="dw_full_model" class="gt_row gt_center" style="border-right-width: 2px; border-right-style: solid; border-right-color: black;"><span class='gt_from_md'>6.24</span></td>
+<td headers="node_null_model" class="gt_row gt_center"><span class='gt_from_md'>11.63</span></td>
+<td headers="node_inter_model" class="gt_row gt_center"><span class='gt_from_md'>15.63</span></td>
+<td headers="node_full_model" class="gt_row gt_center"><span class='gt_from_md'>14.02</span></td></tr>
+    <tr><td headers="model_name" class="gt_row gt_left"><span class='gt_from_md'><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">AIC</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span></span></td>
+<td headers="dw_null_model" class="gt_row gt_center" style="border-left-width: 2px; border-left-style: solid; border-left-color: black;"><span class='gt_from_md'>-1843</span></td>
+<td headers="dw_inter_model" class="gt_row gt_center"><span class='gt_from_md'>-1854.5</span></td>
+<td headers="dw_full_model" class="gt_row gt_center" style="border-right-width: 2px; border-right-style: solid; border-right-color: black;"><span class='gt_from_md'>-1865.5</span></td>
+<td headers="node_null_model" class="gt_row gt_center"><span class='gt_from_md'>8263.3</span></td>
+<td headers="node_inter_model" class="gt_row gt_center"><span class='gt_from_md'>8198.8</span></td>
+<td headers="node_full_model" class="gt_row gt_center"><span class='gt_from_md'>8199.8</span></td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</body>
+</html>

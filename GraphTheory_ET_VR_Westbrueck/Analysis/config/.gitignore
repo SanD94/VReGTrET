@@ -1,0 +1,6 @@
+# Local configuration (user-specific paths)
+local_config.json
+
+# Backup files
+*.bak
+*.backup

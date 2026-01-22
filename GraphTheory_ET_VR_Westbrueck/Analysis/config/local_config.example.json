@@ -1,0 +1,26 @@
+{
+  "comment": "Copy this file to local_config.json and edit with your local paths.",
+  "comment": "Only include fields you want to override from default_config.json",
+  "comment": "Example below shows how to override specific paths:",
+  
+  "paths": {
+    "walking_paths_data_dir": "YOUR_LOCAL_PATH_HERE",
+    "gaze_data_dir": "YOUR_LOCAL_PATH_HERE",
+    "image_dir": "YOUR_LOCAL_PATH_HERE",
+    "collider_dir": "YOUR_LOCAL_PATH_HERE",
+    "output_walking_paths": "YOUR_LOCAL_PATH_HERE",
+    "output_gaze_graph": "YOUR_LOCAL_PATH_HERE"
+  },
+  
+  "participants": [1004, 1005, 1008],
+  
+  "walking_paths_visualization": {
+    "marker_size": 20,
+    "dpi": 200
+  },
+  
+  "gaze_graph_visualization": {
+    "node_marker_size": 150,
+    "edge_width": 2
+  }
+}

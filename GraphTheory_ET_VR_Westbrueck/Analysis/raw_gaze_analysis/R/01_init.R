@@ -66,5 +66,8 @@ init_library()
 init_font()
 
 # Source analysis modules in order
-source(here::here("R/models.R"))
 source(here::here("R/utils.R"))
+source(here::here("R/02_models.R"))
+source(here::here("R/03_statistics.R"))
+source(here::here("R/04_formatting.R"))
+source(here::here("R/05_analysis.R"))

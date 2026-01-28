@@ -113,9 +113,9 @@ fit_model_full <- function(df, outcome_var, family = Gamma(link = "inverse"),
 #' }
 fit_model_sequence <- function(df, outcome_var, family = Gamma(link = "inverse")) {
     list(
-        null = fit_model_null(df, outcome_var, family),
-        intermediate = fit_model_intermediate(df, outcome_var, family),
-        full = fit_model_full(df, outcome_var, family)
+        null = fit_model_null(df, {{ outcome_var }}, family),
+        intermediate = fit_model_intermediate(df, {{ outcome_var }}, family),
+        full = fit_model_full(df, {{ outcome_var }}, family)
     )
 }
 

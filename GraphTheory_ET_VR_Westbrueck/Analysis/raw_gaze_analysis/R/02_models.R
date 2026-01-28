@@ -3,6 +3,23 @@
 #' Functions to fit and manage nested models for statistical analysis
 #' of gaze data with random intercepts by building location and participant.
 
+#' Fix model environment references
+#'
+#' @param model Fitted glmer model object
+#' @return Model with environment references fixed to .GlobalEnv
+#'
+#' @details
+#' Internal helper that fixes environment references in the model object
+#' to allow r2_nakagawa() and icc() to work without explicitly passing null_model.
+#'
+#' @keywords internal
+fix_model_env <- function(model) {
+    environment(model@call$formula) <- .GlobalEnv
+    attr(model@frame, ".Environment") <- .GlobalEnv
+    model
+}
+
+
 #' Fit null model (intercept only)
 #'
 #' @param df Data frame with required columns
@@ -20,11 +37,13 @@
 #' }
 fit_model_null <- function(df, outcome_var, family = Gamma(link = "inverse")) {
     outcome_name <- rlang::as_name(rlang::enquo(outcome_var))
-    formula <- reformulate(
-        termlabels = c("(1 | PID)", "(1 | hitObjectColliderName)"),
-        response = outcome_name
-    )
-    glmer(formula, data = df, family = family)
+    formula <- as.formula(paste(
+        outcome_name, 
+        "~ 1 + (1 | PID) + (1 | hitObjectColliderName)"
+    ))
+    cli::cli_alert_info("Fitting null model: {format(formula)}")
+    model <- glmer(formula, data = df, family = family)
+    fix_model_env(model)
 }
 
 
@@ -45,11 +64,13 @@ fit_model_null <- function(df, outcome_var, family = Gamma(link = "inverse")) {
 #' }
 fit_model_intermediate <- function(df, outcome_var, family = Gamma(link = "inverse")) {
     outcome_name <- rlang::as_name(rlang::enquo(outcome_var))
-    formula <- reformulate(
-        termlabels = c("building_location", "(1 | PID)", "(1 | hitObjectColliderName)"),
-        response = outcome_name
-    )
-    glmer(formula, data = df, family = family)
+    formula <- as.formula(paste(
+        outcome_name, 
+        "~ 1 + building_location + (1 | PID) + (1 | hitObjectColliderName)"
+    ))
+    cli::cli_alert_info("Fitting intermediate model: {format(formula)}")
+    model <- glmer(formula, data = df, family = family)
+    fix_model_env(model)
 }
 
 
@@ -84,11 +105,13 @@ fit_model_full <- function(df, outcome_var, family = Gamma(link = "inverse"),
     }
     
     outcome_name <- rlang::as_name(rlang::enquo(outcome_var))
-    formula <- reformulate(
-        termlabels = c("building_location", "group", "(1 | PID)", "(1 | hitObjectColliderName)"),
-        response = outcome_name
-    )
-    glmer(formula, data = df, family = family)
+    formula <- as.formula(paste(
+        outcome_name, 
+        "~ 1 + building_location + group + (1 | PID) + (1 | hitObjectColliderName)"
+    ))
+    cli::cli_alert_info("Fitting full model: {format(formula)}")
+    model <- glmer(formula, data = df, family = family)
+    fix_model_env(model)
 }
 
 
@@ -141,3 +164,6 @@ fit_poisson_sequence <- function(df, outcome_var) {
         full = fit_model_full(df, {{ outcome_var }}, family = poisson())
     )
 }
+
+
+

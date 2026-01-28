@@ -5,7 +5,11 @@ library(stringr)
 library(performance)
 
 
-get_model_summary <- function(model_0, model_inter, model_full) {
+get_model_summary <- function(model_0, model_inter, model_full, null_model = NULL) {
+    # Use model_0 as null_model if not provided
+    if (is.null(null_model)) {
+        null_model <- model_0
+    }
 
     ## model 0 summary
     model_0_mean_summary <- model_0 %>% tidy() %>% pull(estimate)
@@ -27,7 +31,7 @@ get_model_summary <- function(model_0, model_inter, model_full) {
     model_0_intercept_mean <- model_0_intercept[1]
     model_0_intercept_lowCL <- model_0_intercept[2]
     model_0_intercept_highCL <- model_0_intercept[3]
-    model_0_icc <- model_0 %>% icc(by_group = TRUE) %>% pull(ICC)
+    model_0_icc <- model_0 %>% icc(by_group = TRUE, null_model = null_model) %>% pull(ICC)
     model_0_icc_building <- model_0_icc[1] %>% round(4) * 100
     model_0_icc_PID <- model_0_icc[2] %>% round(4) * 100
     model_0_AIC <- model_0 %>% AIC() %>% round(1)
@@ -76,10 +80,10 @@ get_model_summary <- function(model_0, model_inter, model_full) {
     if (is.na(model_inter_res_var)) {
         model_inter_res_var <- "—"
     }
-    model_inter_icc <- model_inter %>% icc(by_group = TRUE) %>% pull(ICC)
+    model_inter_icc <- model_inter %>% icc(by_group = TRUE, null_model = null_model) %>% pull(ICC)
     model_inter_icc_building <- model_inter_icc[1] %>% round(4) * 100
     model_inter_icc_PID <- model_inter_icc[2] %>% round(4) * 100
-    model_inter_nakagawa <- model_inter %>% r2_nakagawa()
+    model_inter_nakagawa <- model_inter %>% r2_nakagawa(null_model = null_model)
     model_inter_nakagawa_marginal <- model_inter_nakagawa$R2_marginal %>% unname() %>% round(4) * 100
     model_inter_nakagawa_conditional <- model_inter_nakagawa$R2_conditional %>% unname() %>% round(4) * 100
     model_inter_AIC <- model_inter %>% AIC() %>% round(1)
@@ -143,10 +147,10 @@ get_model_summary <- function(model_0, model_inter, model_full) {
     if (is.na(model_full_res_var)) {
         model_full_res_var <- "—"
     }
-    model_full_icc <- model_full %>% icc(by_group = TRUE) %>% pull(ICC)
+    model_full_icc <- model_full %>% icc(by_group = TRUE, null_model = null_model) %>% pull(ICC)
     model_full_icc_building <- model_full_icc[1] %>% round(4) * 100 
     model_full_icc_PID <- model_full_icc[2] %>% round(4) * 100
-    model_full_nakagawa <- model_full %>% r2_nakagawa()
+    model_full_nakagawa <- model_full %>% r2_nakagawa(null_model = null_model)
     model_full_nakagawa_marginal <- model_full_nakagawa$R2_marginal %>% unname() %>% round(4) * 100
     model_full_nakagawa_conditional <- model_full_nakagawa$R2_conditional %>% unname() %>% round(4) * 100
     model_full_AIC <- model_full %>% AIC() %>% round(1)
@@ -182,7 +186,11 @@ get_model_summary <- function(model_0, model_inter, model_full) {
 }
 
 
-get_sim_model_summary <- function(model_0, model_inter, model_full) {
+get_sim_model_summary <- function(model_0, model_inter, model_full, null_model = NULL) {
+    # Use model_0 as null_model if not provided
+    if (is.null(null_model)) {
+        null_model <- model_0
+    }
 
     ## model 0 summary
     model_0_mean_summary <- model_0 %>% tidy() %>% pull(estimate)
@@ -204,7 +212,7 @@ get_sim_model_summary <- function(model_0, model_inter, model_full) {
     model_0_intercept_mean <- model_0_intercept[1]
     model_0_intercept_lowCL <- model_0_intercept[2]
     model_0_intercept_highCL <- model_0_intercept[3]
-    model_0_icc <- model_0 %>% icc(by_group = TRUE) %>% pull(ICC)
+    model_0_icc <- model_0 %>% icc(by_group = TRUE, null_model = null_model) %>% pull(ICC)
     model_0_icc_building <- model_0_icc[1] %>% round(4) * 100
     model_0_icc_PID <- model_0_icc[2] %>% round(4) * 100
     model_0_AIC <- model_0 %>% AIC() %>% round(1)
@@ -255,10 +263,10 @@ get_sim_model_summary <- function(model_0, model_inter, model_full) {
     if (is.na(model_inter_res_var)) {
         model_inter_res_var <- "—"
     }
-    model_inter_icc <- model_inter %>% icc(by_group = TRUE) %>% pull(ICC)
+    model_inter_icc <- model_inter %>% icc(by_group = TRUE, null_model = null_model) %>% pull(ICC)
     model_inter_icc_building <- model_inter_icc[1] %>% round(4) * 100
     model_inter_icc_PID <- model_inter_icc[2] %>% round(4) * 100
-    model_inter_nakagawa <- model_inter %>% r2_nakagawa()
+    model_inter_nakagawa <- model_inter %>% r2_nakagawa(null_model = null_model)
     model_inter_nakagawa_marginal <- model_inter_nakagawa$R2_marginal %>% unname() %>% round(4) * 100
     model_inter_nakagawa_conditional <- model_inter_nakagawa$R2_conditional %>% unname() %>% round(4) * 100
     model_inter_AIC <- model_inter %>% AIC() %>% round(1)
@@ -325,10 +333,10 @@ get_sim_model_summary <- function(model_0, model_inter, model_full) {
     if (is.na(model_full_res_var)) {
         model_full_res_var <- "—"
     }
-    model_full_icc <- model_full %>% icc(by_group = TRUE) %>% pull(ICC)
+    model_full_icc <- model_full %>% icc(by_group = TRUE, null_model = null_model) %>% pull(ICC)
     model_full_icc_building <- model_full_icc[1] %>% round(4) * 100 
     model_full_icc_PID <- model_full_icc[2] %>% round(4) * 100
-    model_full_nakagawa <- model_full %>% r2_nakagawa()
+    model_full_nakagawa <- model_full %>% r2_nakagawa(null_model = null_model)
     model_full_nakagawa_marginal <- model_full_nakagawa$R2_marginal %>% unname() %>% round(4) * 100
     model_full_nakagawa_conditional <- model_full_nakagawa$R2_conditional %>% unname() %>% round(4) * 100
     model_full_AIC <- model_full %>% AIC() %>% round(1)

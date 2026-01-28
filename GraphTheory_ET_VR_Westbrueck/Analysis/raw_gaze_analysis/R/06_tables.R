@@ -294,6 +294,8 @@ export_contrasts_table <- function(contrasts, output_path, table_title = NULL) {
 #' @param emm_ndc emmeans object for NDC (from extract_emmeans())
 #' @param contrasts_ndc Contrasts tibble for NDC (from extract_contrasts())
 #' @param factor_name Character name of factor being compared ("group" or "building_location")
+#' @param filter_ndc_contrasts Logical, remove NDC contrasts with p >= 0.05 (default: FALSE)
+#' @param relabel_groups Named character vector for relabeling group levels (e.g., c("peripheral" = "peripheral scotoma"))
 #'
 #' @return Tibble with structured post-hoc results: group levels with EMM/CI,
 #'         then separator line, then pairwise comparisons with z/p values
@@ -304,6 +306,9 @@ export_contrasts_table <- function(contrasts, output_path, table_title = NULL) {
 #' - Separator row
 #' - Pairwise comparisons with z-ratios and p-values
 #' Structure is repeated for each outcome (dwell time and NDC)
+#'
+#' If filter_ndc_contrasts is TRUE, NDC contrast rows with non-significant p-values are removed
+#' to avoid presenting misleading comparisons.
 #'
 #' @examples
 #' \dontrun{
@@ -318,7 +323,7 @@ export_contrasts_table <- function(contrasts, output_path, table_title = NULL) {
 #'     "group"
 #'   )
 #' }
-build_posthoc_table <- function(emm_dwell, contrasts_dwell, emm_ndc, contrasts_ndc, factor_name) {
+build_posthoc_table <- function(emm_dwell, contrasts_dwell, emm_ndc, contrasts_ndc, factor_name, filter_ndc_contrasts = FALSE, relabel_groups = NULL) {
     
     # Convert emmeans summary to tibble
     emm_dwell_tbl <- summary(emm_dwell) %>% as_tibble()
@@ -330,54 +335,88 @@ build_posthoc_table <- function(emm_dwell, contrasts_dwell, emm_ndc, contrasts_n
     # Extract group/location labels and order from emmeans
     group_labels <- emm_dwell_tbl %>% pull(!!sym(factor_col)) %>% as.character()
     
+    # Relabel groups if mapping provided (names are old labels, values are new labels)
+    if (!is.null(relabel_groups)) {
+        for (i in seq_along(relabel_groups)) {
+            group_labels[group_labels == names(relabel_groups)[i]] <- relabel_groups[i]
+        }
+    }
+    
+    # Get estimate column names (varies by model type: "response" for Gamma, "rate" for Poisson, etc.)
+    dwell_est_col <- if ("response" %in% names(emm_dwell_tbl)) "response" else names(emm_dwell_tbl)[2]
+    ndc_est_col <- if ("rate" %in% names(emm_ndc_tbl)) "rate" else if ("response" %in% names(emm_ndc_tbl)) "response" else names(emm_ndc_tbl)[2]
+    
     # Build combined EMM rows for each group
     emm_combined <- tibble(
         "Variable" = group_labels,
         "Dwell Time EMM [95% CI]" = sprintf(
             "%.3f [%.3f, %.3f]",
-            emm_dwell_tbl[[factor_name]],
+            emm_dwell_tbl[[dwell_est_col]],
             emm_dwell_tbl$asymp.LCL,
             emm_dwell_tbl$asymp.UCL
         ),
         "NDC EMM [95% CI]" = sprintf(
             "%.3f [%.3f, %.3f]",
-            emm_ndc_tbl[[factor_name]],
+            emm_ndc_tbl[[ndc_est_col]],
             emm_ndc_tbl$asymp.LCL,
             emm_ndc_tbl$asymp.UCL
         )
-    )
-    
-    # Create separator row
-    separator_row <- tibble(
-        "Variable" = "—",
-        "Dwell Time EMM [95% CI]" = "—",
-        "NDC EMM [95% CI]" = "—"
     )
     
     # Format contrasts with both dwell time and NDC z-values and p-values
     # Get contrast names from dwell time
     contrast_names <- contrasts_dwell %>% pull(contrast) %>% as.character()
     
-    contrasts_combined <- tibble(
-        "Variable" = contrast_names,
-        "Dwell Time EMM [95% CI]" = sprintf(
-            "z = %.2f, %s",
-            contrasts_dwell$z.ratio,
-            map_chr(contrasts_dwell$p.value, get_p_string)
-        ),
-        "NDC EMM [95% CI]" = sprintf(
+    # Relabel contrasts if mapping provided (names are old labels, values are new labels)
+    if (!is.null(relabel_groups)) {
+        for (i in seq_along(relabel_groups)) {
+            old_label <- names(relabel_groups)[i]
+            new_label <- relabel_groups[i]
+            contrast_names <- str_replace_all(contrast_names, fixed(old_label), new_label)
+        }
+    }
+    
+    # Format dwell time contrasts (always show)
+    dwell_contrasts_text <- sprintf(
+        "z = %.2f, %s",
+        contrasts_dwell$z.ratio,
+        map_chr(contrasts_dwell$p.value, get_p_string)
+    )
+    
+    # Format NDC contrasts, replacing non-significant ones with dash if filtered
+    if (filter_ndc_contrasts) {
+        significant_idx <- contrasts_ndc$p.value < 0.05
+        ndc_contrasts_text <- ifelse(
+            significant_idx,
+            sprintf(
+                "z = %.2f, %s",
+                contrasts_ndc$z.ratio,
+                map_chr(contrasts_ndc$p.value, get_p_string)
+            ),
+            "—"
+        )
+    } else {
+        ndc_contrasts_text <- sprintf(
             "z = %.2f, %s",
             contrasts_ndc$z.ratio,
             map_chr(contrasts_ndc$p.value, get_p_string)
         )
+    }
+    
+    contrasts_combined <- tibble(
+        "Variable" = contrast_names,
+        "Dwell Time EMM [95% CI]" = dwell_contrasts_text,
+        "NDC EMM [95% CI]" = ndc_contrasts_text
     )
     
-    # Final table: EMM rows + separator + contrast rows
+    # Final table: EMM rows + contrast rows (no separator row; styled with double border in export)
     result <- bind_rows(
         emm_combined,
-        separator_row,
         contrasts_combined
     )
+    
+    # Attach metadata: number of EMM rows for styling
+    attr(result, "n_emm_rows") <- nrow(emm_combined)
     
     result
 }
@@ -411,7 +450,7 @@ export_posthoc_table <- function(posthoc_table, output_path, factor_name, combin
     
     # Get factor titles
     factor_title <- case_when(
-        factor_name == "group" ~ "Viewing Conditions",
+        factor_name == "group" ~ "Viewing Condition",
         factor_name == "building_location" ~ "Region",
         TRUE ~ factor_name
     )
@@ -423,14 +462,14 @@ export_posthoc_table <- function(posthoc_table, output_path, factor_name, combin
         }
         
         combined_factor_title <- case_when(
-            combined_factor_name == "group" ~ "Viewing Conditions",
+            combined_factor_name == "group" ~ "Viewing Condition",
             combined_factor_name == "building_location" ~ "Region",
             TRUE ~ combined_factor_name
         )
         
-        # Create section separator with factor name
+        # Create section separator with bold factor name header
         factor_separator <- tibble(
-            "Variable" = paste0(">>> ", combined_factor_title, " <<<"),
+            "Variable" = paste0("**", combined_factor_title, "**"),
             "Dwell Time EMM [95% CI]" = "",
             "NDC EMM [95% CI]" = ""
         )
@@ -449,6 +488,10 @@ export_posthoc_table <- function(posthoc_table, output_path, factor_name, combin
         table_title <- paste0("**Post-Hoc Results: ", factor_title, "**")
     }
     
+    # Get number of EMM rows (stored as attribute from build_posthoc_table)
+    n_emm_posthoc <- attr(posthoc_table, "n_emm_rows")
+    if (is.null(n_emm_posthoc)) n_emm_posthoc <- nrow(posthoc_table)
+    
     gt_tbl <- table_to_export %>%
         gt() %>%
         tab_header(
@@ -456,20 +499,55 @@ export_posthoc_table <- function(posthoc_table, output_path, factor_name, combin
             subtitle = md("*Estimated marginal means (top section) and pairwise contrasts (bottom section)*")
         ) %>%
         cols_label(
-            Variable = md("**Condition**"),
+            Variable = md("**Viewing Condition**"),
             "Dwell Time EMM [95% CI]" = md("**Dwell Time**<br>*EMM [95% CI] or z-test*"),
             "NDC EMM [95% CI]" = md("**NDC**<br>*EMM [95% CI] or z-test*")
         ) %>%
         cols_width(everything() ~ px(280)) %>%
-        fmt_markdown() %>%
-        # Style separator rows (both "—" and factor headers) with borders
+        fmt_markdown()
+    
+    # Style double border: last EMM row of first table
+    gt_tbl <- gt_tbl %>%
         tab_style(
             style = cell_borders(
-                sides = c("top", "bottom"),
+                sides = "bottom",
                 color = "black",
-                weight = px(1)
+                style = "double",
+                weight = px(3)
             ),
-            locations = cells_body(rows = Variable == "—" | grepl("^>>>", Variable))
+            locations = cells_body(rows = seq(n_emm_posthoc, n_emm_posthoc))
+        )
+    
+    # If combined table, add double border for second table's EMM section
+    if (!is.null(combined_table)) {
+        n_emm_combined <- attr(combined_table, "n_emm_rows")
+        if (is.null(n_emm_combined)) n_emm_combined <- nrow(combined_table)
+        
+        # Row number of last EMM in second table = first EMM rows + header row + first table contrasts + second table EMMs
+        # This is: n_emm_posthoc + 1 (header) + (nrow(posthoc_table) - n_emm_posthoc) + n_emm_combined
+        row_num_second_emm_end <- nrow(table_to_export) - (nrow(combined_table) - n_emm_combined)
+        
+        gt_tbl <- gt_tbl %>%
+            tab_style(
+                style = cell_borders(
+                    sides = "bottom",
+                    color = "black",
+                    style = "double",
+                    weight = px(3)
+                ),
+                locations = cells_body(rows = seq(row_num_second_emm_end, row_num_second_emm_end))
+            )
+    }
+    
+    # Style factor header rows with bold text and top border
+    gt_tbl <- gt_tbl %>%
+        tab_style(
+            style = cell_borders(
+                sides = "top",
+                color = "black",
+                weight = px(2)
+            ),
+            locations = cells_body(rows = grepl("^\\*\\*", Variable))
         ) %>%
         gtsave(output_path)
     

@@ -58,6 +58,8 @@ fit_model_intermediate <- function(df, outcome_var, family = Gamma(link = "inver
 #' @param df Data frame with required columns
 #' @param outcome_var Outcome variable (bare column name)
 #' @param family GLM family specification (default: Gamma with inverse link)
+#' @param group_levels Optional character vector specifying group factor levels.
+#'   If provided, reorders the group factor in df before fitting.
 #' @return Fitted glmer model
 #'
 #' @details
@@ -67,8 +69,20 @@ fit_model_intermediate <- function(df, outcome_var, family = Gamma(link = "inver
 #' @examples
 #' \dontrun{
 #'   fit_model_full(df, median_clusterDuration)
+#'   fit_model_full(
+#'     df, 
+#'     median_clusterDuration,
+#'     group_levels = c("control", "peripheral", "central")
+#'   )
 #' }
-fit_model_full <- function(df, outcome_var, family = Gamma(link = "inverse")) {
+fit_model_full <- function(df, outcome_var, family = Gamma(link = "inverse"), 
+                           group_levels = NULL) {
+    # Reorder group factor if levels specified
+    if (!is.null(group_levels)) {
+        df <- df %>%
+            mutate(group = factor(group, levels = group_levels))
+    }
+    
     outcome_name <- rlang::as_name(rlang::enquo(outcome_var))
     formula <- reformulate(
         termlabels = c("building_location", "group", "(1 | PID)", "(1 | hitObjectColliderName)"),
@@ -92,7 +106,10 @@ fit_model_full <- function(df, outcome_var, family = Gamma(link = "inverse")) {
 #' @examples
 #' \dontrun{
 #'   models <- fit_model_sequence(df, median_clusterDuration)
-#'   models$full
+#'   models <- fit_model_sequence(
+#'     df, 
+#'     median_clusterDuration
+#'   )
 #' }
 fit_model_sequence <- function(df, outcome_var, family = Gamma(link = "inverse")) {
     list(

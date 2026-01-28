@@ -31,12 +31,15 @@ Extracted visualization and table generation code from result notebooks into ded
 - `build_comparison_table()` - Format LRT comparison results
 - `format_emm_contrasts()` - Clean up emmeans contrast output
 - `export_contrasts_table()` - Export contrasts as publication-ready HTML
+- `build_posthoc_table()` - **NEW** Build combined EMM + pairwise contrasts table
+- `export_posthoc_table()` - **NEW** Export post-hoc results as publication-ready HTML
 
 **Design Notes**:
 - Deeply connected to `utils.R` (`get_sim_model_summary()`) as intended—don't refactor further
 - Uses GT (Great Tables) for publication formatting
 - All markdown formatting happens here, not in utils
 - Exports to HTML files in output folder
+- New post-hoc functions combine dwell time and NDC results in a single table
 
 ### Modified Files
 
@@ -76,6 +79,32 @@ dwell_summaries <- get_sim_model_summary(model_0, model_inter, model_full)
 node_summaries <- get_sim_model_summary(node_model_0, node_model_inter, node_model_full)
 summary_tbl <- build_model_summary_table(dwell_summaries, node_summaries)
 export_model_summary_table(summary_tbl, here(config$OUTPUT_FOLDER, "model_summaries.html"))
+
+# For post-hoc results (EMM + pairwise contrasts for both dwell time and NDC)
+emm_dwell_group <- model_full %>% extract_emmeans(~ group)
+contrasts_dwell_group <- emm_dwell_group %>% extract_contrasts()
+emm_ndc_group <- node_model_full %>% extract_emmeans(~ group)
+contrasts_ndc_group <- emm_ndc_group %>% extract_contrasts()
+
+posthoc_group_tbl <- build_posthoc_table(
+  emm_dwell_group, contrasts_dwell_group,
+  emm_ndc_group, contrasts_ndc_group,
+  "group"
+)
+export_posthoc_table(posthoc_group_tbl, here(config$OUTPUT_FOLDER, "posthoc_group.html"), "group")
+
+# Repeat for building_location factor
+emm_dwell_loc <- model_full %>% extract_emmeans(~ building_location)
+contrasts_dwell_loc <- emm_dwell_loc %>% extract_contrasts()
+emm_ndc_loc <- node_model_full %>% extract_emmeans(~ building_location)
+contrasts_ndc_loc <- emm_ndc_loc %>% extract_contrasts()
+
+posthoc_loc_tbl <- build_posthoc_table(
+  emm_dwell_loc, contrasts_dwell_loc,
+  emm_ndc_loc, contrasts_ndc_loc,
+  "building_location"
+)
+export_posthoc_table(posthoc_loc_tbl, here(config$OUTPUT_FOLDER, "posthoc_location.html"), "building_location")
 ```
 
 ## Relationship to Other Modules

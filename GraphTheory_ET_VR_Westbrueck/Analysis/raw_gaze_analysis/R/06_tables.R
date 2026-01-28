@@ -285,3 +285,193 @@ export_contrasts_table <- function(contrasts, output_path, table_title = NULL) {
     
     invisible(gt_tbl)
 }
+
+
+#' Build post-hoc results table (EMM + pairwise contrasts)
+#'
+#' @param emm_dwell emmeans object for dwell time (from extract_emmeans())
+#' @param contrasts_dwell Contrasts tibble for dwell time (from extract_contrasts())
+#' @param emm_ndc emmeans object for NDC (from extract_emmeans())
+#' @param contrasts_ndc Contrasts tibble for NDC (from extract_contrasts())
+#' @param factor_name Character name of factor being compared ("group" or "building_location")
+#'
+#' @return Tibble with structured post-hoc results: group levels with EMM/CI,
+#'         then separator line, then pairwise comparisons with z/p values
+#'
+#' @details
+#' Creates a publication-ready tibble with:
+#' - Estimated marginal means and confidence intervals for each group level
+#' - Separator row
+#' - Pairwise comparisons with z-ratios and p-values
+#' Structure is repeated for each outcome (dwell time and NDC)
+#'
+#' @examples
+#' \dontrun{
+#'   emm_dwell <- extract_emmeans(model_full, ~ group)
+#'   contrasts_dwell <- extract_contrasts(emm_dwell)
+#'   emm_ndc <- extract_emmeans(node_model_full, ~ group)
+#'   contrasts_ndc <- extract_contrasts(emm_ndc)
+#'   
+#'   posthoc_tbl <- build_posthoc_table(
+#'     emm_dwell, contrasts_dwell,
+#'     emm_ndc, contrasts_ndc,
+#'     "group"
+#'   )
+#' }
+build_posthoc_table <- function(emm_dwell, contrasts_dwell, emm_ndc, contrasts_ndc, factor_name) {
+    
+    # Convert emmeans summary to tibble
+    emm_dwell_tbl <- summary(emm_dwell) %>% as_tibble()
+    emm_ndc_tbl <- summary(emm_ndc) %>% as_tibble()
+    
+    # Get the factor variable name (first column in emm results)
+    factor_col <- names(emm_dwell_tbl)[1]
+    
+    # Extract group/location labels and order from emmeans
+    group_labels <- emm_dwell_tbl %>% pull(!!sym(factor_col)) %>% as.character()
+    
+    # Build combined EMM rows for each group
+    emm_combined <- tibble(
+        "Variable" = group_labels,
+        "Dwell Time EMM [95% CI]" = sprintf(
+            "%.3f [%.3f, %.3f]",
+            emm_dwell_tbl[[factor_name]],
+            emm_dwell_tbl$asymp.LCL,
+            emm_dwell_tbl$asymp.UCL
+        ),
+        "NDC EMM [95% CI]" = sprintf(
+            "%.3f [%.3f, %.3f]",
+            emm_ndc_tbl[[factor_name]],
+            emm_ndc_tbl$asymp.LCL,
+            emm_ndc_tbl$asymp.UCL
+        )
+    )
+    
+    # Create separator row
+    separator_row <- tibble(
+        "Variable" = "—",
+        "Dwell Time EMM [95% CI]" = "—",
+        "NDC EMM [95% CI]" = "—"
+    )
+    
+    # Format contrasts with both dwell time and NDC z-values and p-values
+    # Get contrast names from dwell time
+    contrast_names <- contrasts_dwell %>% pull(contrast) %>% as.character()
+    
+    contrasts_combined <- tibble(
+        "Variable" = contrast_names,
+        "Dwell Time EMM [95% CI]" = sprintf(
+            "z = %.2f, %s",
+            contrasts_dwell$z.ratio,
+            map_chr(contrasts_dwell$p.value, get_p_string)
+        ),
+        "NDC EMM [95% CI]" = sprintf(
+            "z = %.2f, %s",
+            contrasts_ndc$z.ratio,
+            map_chr(contrasts_ndc$p.value, get_p_string)
+        )
+    )
+    
+    # Final table: EMM rows + separator + contrast rows
+    result <- bind_rows(
+        emm_combined,
+        separator_row,
+        contrasts_combined
+    )
+    
+    result
+}
+
+
+#' Export post-hoc results table as HTML
+#'
+#' @param posthoc_table Tibble from build_posthoc_table()
+#' @param output_path Character path for HTML output file
+#' @param factor_name Character name of factor ("group" or "building_location")
+#' @param combined_table Optional second tibble from build_posthoc_table() to combine with posthoc_table
+#' @param combined_factor_name Character name of second factor (required if combined_table provided)
+#'
+#' @return Invisibly returns the gt object
+#'
+#' @details
+#' If combined_table is provided, creates a single export with both factors separated by a section header.
+#'
+#' @examples
+#' \dontrun{
+#'   posthoc_tbl <- build_posthoc_table(...)
+#'   export_posthoc_table(posthoc_tbl, "output/posthoc.html", "group")
+#'   
+#'   # Combine two factors
+#'   posthoc_group <- build_posthoc_table(...)
+#'   posthoc_loc <- build_posthoc_table(...)
+#'   export_posthoc_table(posthoc_group, "output/posthoc_combined.html", "group",
+#'                        combined_table = posthoc_loc, combined_factor_name = "building_location")
+#' }
+export_posthoc_table <- function(posthoc_table, output_path, factor_name, combined_table = NULL, combined_factor_name = NULL) {
+    
+    # Get factor titles
+    factor_title <- case_when(
+        factor_name == "group" ~ "Viewing Conditions",
+        factor_name == "building_location" ~ "Region",
+        TRUE ~ factor_name
+    )
+    
+    # Combine tables if provided
+    if (!is.null(combined_table)) {
+        if (is.null(combined_factor_name)) {
+            stop("combined_factor_name must be provided when combined_table is specified")
+        }
+        
+        combined_factor_title <- case_when(
+            combined_factor_name == "group" ~ "Viewing Conditions",
+            combined_factor_name == "building_location" ~ "Region",
+            TRUE ~ combined_factor_name
+        )
+        
+        # Create section separator with factor name
+        factor_separator <- tibble(
+            "Variable" = paste0(">>> ", combined_factor_title, " <<<"),
+            "Dwell Time EMM [95% CI]" = "",
+            "NDC EMM [95% CI]" = ""
+        )
+        
+        # Combine first table + separator + second table
+        table_to_export <- bind_rows(
+            posthoc_table,
+            factor_separator,
+            combined_table
+        )
+        
+        # Update title to reflect both factors
+        table_title <- paste0("**Post-Hoc Results: ", factor_title, " & ", combined_factor_title, "**")
+    } else {
+        table_to_export <- posthoc_table
+        table_title <- paste0("**Post-Hoc Results: ", factor_title, "**")
+    }
+    
+    gt_tbl <- table_to_export %>%
+        gt() %>%
+        tab_header(
+            title = md(table_title),
+            subtitle = md("*Estimated marginal means (top section) and pairwise contrasts (bottom section)*")
+        ) %>%
+        cols_label(
+            Variable = md("**Condition**"),
+            "Dwell Time EMM [95% CI]" = md("**Dwell Time**<br>*EMM [95% CI] or z-test*"),
+            "NDC EMM [95% CI]" = md("**NDC**<br>*EMM [95% CI] or z-test*")
+        ) %>%
+        cols_width(everything() ~ px(280)) %>%
+        fmt_markdown() %>%
+        # Style separator rows (both "—" and factor headers) with borders
+        tab_style(
+            style = cell_borders(
+                sides = c("top", "bottom"),
+                color = "black",
+                weight = px(1)
+            ),
+            locations = cells_body(rows = Variable == "—" | grepl("^>>>", Variable))
+        ) %>%
+        gtsave(output_path)
+    
+    invisible(gt_tbl)
+}

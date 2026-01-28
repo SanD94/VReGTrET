@@ -17,7 +17,8 @@ get_config <- function() {
     # Output file names
     NAISU_LOCATION_PLOT = "naisu_only_location_node_filter.svg",
     GROUP_NODE_DEGREE_PLOT = "group_node_degree_ecdf.svg",
-    SCOTOMA_MODEL_SUMMARIES_HTML = "model_summaries.html"
+    SCOTOMA_MODEL_SUMMARIES_HTML = "model_summaries.html",
+    POSTHOC_COMBINED_HTML = "posthoc_combined.html"
   )
 }
 

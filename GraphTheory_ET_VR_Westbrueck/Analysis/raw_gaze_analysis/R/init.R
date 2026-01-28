@@ -64,3 +64,7 @@ init_font <- function() {
 # Run initialization functions
 init_library()
 init_font()
+
+# Source analysis modules in order
+source(here::here("R/models.R"))
+source(here::here("R/utils.R"))

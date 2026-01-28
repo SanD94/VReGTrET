@@ -36,7 +36,6 @@ init_library <- function() {
     library(ggprism)
     library(patchwork)
     library(scales)
-    library(ggpubr)
     library(cli)
     library(here)
 

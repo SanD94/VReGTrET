@@ -15,7 +15,7 @@
 - `notebooks/results/` - Final analysis notebooks (results_scotoma.ipynb, results_glaucoma.ipynb)
 - `notebooks/exploratory/` - Exploratory analyses and playgrounds
 - `R/init.R` - Project initialization: loads config, libraries (tidyverse, lme4, emmeans, ggprism, etc.), configures 300dpi fonts
-- `src/utils.R` - Shared utility functions for mixed-effects model summaries and statistical reporting
+- `R/utils.R` - Shared utility functions for mixed-effects model summaries and statistical reporting
 - `data/` - Input CSV files (gaze data, node data, connection graphs)
 - `output/`, `playground_output/` - Generated plots and results
 
@@ -37,6 +37,6 @@
 - Model comparison: use `anova()` for likelihood ratio tests
 - Effect estimation: use `emmeans::emmeans()` for estimated marginal means
 - Model diagnostics: `performance::icc()`, `r2_nakagawa()`
-- Rounding: 3 decimals for coefficients, 4 for ICC/R²
+- Rounding: 2 decimals for coefficients, 2 for ICC/R²
 
 **Imports:** Always load needed tidyverse components explicitly; source utils.R for helper functions

@@ -16,7 +16,8 @@ get_config <- function() {
     CONNECTIONS_FILE = "graph_group_connections.csv",
     # Output file names
     NAISU_LOCATION_PLOT = "naisu_only_location_node_filter.svg",
-    GROUP_NODE_DEGREE_PLOT = "group_node_degree_ecdf.svg"
+    GROUP_NODE_DEGREE_PLOT = "group_node_degree_ecdf.svg",
+    SCOTOMA_MODEL_SUMMARIES_HTML = "model_summaries.html"
   )
 }
 

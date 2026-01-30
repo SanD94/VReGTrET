@@ -26,8 +26,12 @@
 #' }
 format_contrast_table <- function(contrasts_tibble, y_positions = NULL, sig_labels = NULL) {
   
+  # Auto-detect separator in contrast column (e.g., " - " for Gamma, " / " for Poisson)
+  first_contrast <- as.character(contrasts_tibble$contrast[1])
+  separator <- if (grepl(" - ", first_contrast, fixed = TRUE)) " - " else if (grepl(" / ", first_contrast, fixed = TRUE)) " / " else " - "
+  
   # Extract group pairs from contrast column (e.g., "control - peripheral" -> c("control", "peripheral"))
-  contrast_pairs <- strsplit(contrasts_tibble$contrast, " - ")
+  contrast_pairs <- strsplit(as.character(contrasts_tibble$contrast), separator, fixed = TRUE)
   group1 <- sapply(contrast_pairs, function(x) trimws(x[1]))
   group2 <- sapply(contrast_pairs, function(x) trimws(x[2]))
   

@@ -105,8 +105,8 @@ glance.compare_models <- function(x, ...) {
 #' }
 extract_emmeans <- function(model, specs, transform = "response") {
     ref_grid_obj <- ref_grid(model)
-    new_grid <- regrid(ref_grid_obj, transform = transform)
-    emmeans(new_grid, specs)
+    #new_grid <- regrid(ref_grid_obj, transform = transform)
+    emmeans(ref_grid_obj, specs, type = transform)
 }
 
 
